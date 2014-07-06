@@ -4,9 +4,11 @@
   "description": "web interface for kappa",
   "main": "plugin/index.js",
   "scripts": {
+    "postinstall": "node_modules/.bin/bower install --allow-root",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "bower": "^1.3.7",
     "negotiator": "^0.4.7"
   },
   "repository": {

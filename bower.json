@@ -1,0 +1,27 @@
+{
+  "name": "kappa-ui",
+  "version": "0.0.1",
+  "homepage": "https://github.com/samsel/kappa-ui",
+  "authors": [
+    "Sam Selvanathan <santhonyselvanat@paypal.com>"
+  ],
+  "description": "web interface for kappa",
+  "main": "app/index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "backbone": "~1.1.2",
+    "underscore": "~1.6.0",
+    "requirejs": "~2.1.14",
+    "bootstrap": "~3.2.0",
+    "dustjs-linkedin": "~2.4.0"
+  }
+}
