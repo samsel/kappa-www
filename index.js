@@ -1,18 +1,7 @@
 'use strict';
 
 var pkg = require('./package'),
-    detector = require('./lib/detector');
-
-var isWebRequest = {
-    method: function(req, reply) {
-        reply(detector.isBrowser(req));
-    },
-    assign: "isWebRequest"
-};
-
-var render = function (req, reply) {
-    reply("yeah browser");
-};
+    Negotiator = require('negotiator');
 
 module.exports = {
 
@@ -21,11 +10,28 @@ module.exports = {
     version: pkg.version,
 
     register: function (plugin, options, next) {
+        var negotiator;
 
-        plugin.expose({
-            isWebRequest: isWebRequest,
-            render: render
-        }); 
+        plugin.route({
+            method: 'GET',
+            path: '/public/{path*}',
+            vhost: options.vhost,
+            handler: {
+                directory: {
+                    path: './public',
+                    listing: false,
+                    index: true
+                }
+            }
+        });
+
+        plugin.ext('onRequest', function(request, next) {
+            negotiator = new Negotiator(request.raw.req);
+            if (negotiator.mediaType() === 'text/html') {
+                request.setUrl('/public/' + request.path);
+            } 
+            next();
+        });       
 
         next();
     }
