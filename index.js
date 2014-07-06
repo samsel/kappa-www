@@ -1,7 +1,6 @@
 'use strict';
 
-var hapi = require('hapi'),
-    pkg = require('./package'),
+var pkg = require('./package'),
     detector = require('./lib/detector');
 
 var isWebRequest = {
