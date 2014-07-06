@@ -10,7 +10,11 @@ module.exports = {
     version: pkg.version,
 
     register: function (plugin, options, next) {
-        var negotiator;
+        var negotiator, assetPaths;
+
+        assetPaths = ['javascripts', 
+                        'css',
+                        'templates'];
 
         plugin.route({
             method: 'GET',
@@ -27,11 +31,25 @@ module.exports = {
 
         plugin.ext('onRequest', function(request, next) {
             negotiator = new Negotiator(request.raw.req);
-            if (negotiator.mediaType() === 'text/html') {
+            if (negotiator.mediaType() === 'text/html' && 
+                assetPaths.indexOf(request.path.split('/')[1]) !== -1) {
                 request.setUrl('/public/' + request.path);
             } 
             next();
-        });       
+        });
+
+        plugin.ext('onPostHandler', function(request, next) {
+            negotiator = new Negotiator(request.raw.req);
+            if (negotiator.mediaType() === 'text/html') {
+                next({
+                    path: request.path,
+                    output: request.response.output
+                });
+                return;
+            }
+
+            next();
+        });             
 
         next();
     }
