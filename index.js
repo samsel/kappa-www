@@ -1,7 +1,7 @@
 'use strict';
 
 var pkg = require('./package'),
-    Negotiator = require('negotiator');
+    utils = require('./lib/utils');
 
 module.exports = {
 
@@ -10,11 +10,6 @@ module.exports = {
     version: pkg.version,
 
     register: function (plugin, options, next) {
-        var negotiator, assetPaths;
-
-        assetPaths = ['javascripts', 
-                        'css',
-                        'templates'];
 
         plugin.route({
             method: 'GET',
@@ -29,28 +24,27 @@ module.exports = {
             }
         });
 
-        plugin.ext('onRequest', function(request, next) {
-            negotiator = new Negotiator(request.raw.req);
-            if (negotiator.mediaType() === 'text/html' && 
-                assetPaths.indexOf(request.path.split('/')[1]) !== -1) {
-                request.setUrl('/public/' + request.path);
+        plugin.ext('onRequest', function(req, next) {
+            if (utils.isHtmlRequest(req) && utils.isAssetRequest(req)) {
+                req.setUrl('/public/' + req.path);
             } 
             next();
         });
 
-        plugin.ext('onPostHandler', function(request, next) {
-            negotiator = new Negotiator(request.raw.req);
-            if (negotiator.mediaType() === 'text/html') {
-                next({
-                    path: request.path,
-                    output: request.response.output
-                });
+        plugin.ext('onPostHandler', function(req, reply) {
+            if (utils.isHtmlRequest(req) && !utils.isAssetRequest(req)) {
+                reply.file(__dirname + '/public/index.html');
                 return;
             }
 
-            next();
+            reply();
         });             
 
         next();
     }
 };
+
+// reply({
+//     path: request.path,
+//     output: request.response.output
+// });
