@@ -1,7 +1,7 @@
 'use strict';
 
-var pkg = require('./package'),
-    utils = require('./lib/utils');
+var pkg = require('../package'),
+    utils = require('./utils');
 
 module.exports = {
 
@@ -13,11 +13,11 @@ module.exports = {
 
         plugin.route({
             method: 'GET',
-            path: '/public/{path*}',
+            path: utils.assestRoute,
             vhost: options.vhost,
             handler: {
                 directory: {
-                    path: './public',
+                    path: utils.assestPath,
                     listing: false,
                     index: true
                 }
@@ -26,14 +26,14 @@ module.exports = {
 
         plugin.ext('onRequest', function(req, next) {
             if (utils.isHtmlRequest(req) && utils.isAssetRequest(req)) {
-                req.setUrl('/public/' + req.path);
+                req.setUrl(utils.assestPathForPath(req.path));
             } 
             next();
         });
 
         plugin.ext('onPostHandler', function(req, reply) {
             if (utils.isHtmlRequest(req) && !utils.isAssetRequest(req)) {
-                reply.file(__dirname + '/public/index.html');
+                reply.file(utils.indexFile);
                 return;
             }
 
