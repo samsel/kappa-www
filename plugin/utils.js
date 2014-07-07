@@ -16,18 +16,10 @@ module.exports.shouldRenderHtml = function (req) {
 			!req.locals.assetRequest;
 };
 
-module.exports.assestPathForPath = function (path) {
-	return '/' + config.assetDirectory + '/' + path;
+module.exports.viewForStatus = function (statusCode) {
+	return config.views[statusCode + ''] || config.views['500'];	
 };
 
-module.exports.assestRoute = (function () {
-	return '/' + config.assetDirectory + '/{path*}';
-}());
-
-module.exports.assestPath = (function () {
-	return './' + config.assetDirectory;
-}());
-
-module.exports.indexFile = config.indexFile;
-
-module.exports.viewPath = ('./' + config.assetDirectory);
+module.exports.assestRoute = '/'  + config.assetDirectory + '/{path*}';
+module.exports.assestPath  = './' + config.assetDirectory;
+module.exports.viewPath    = './' + config.assetDirectory + '/' + config.templateDirectory;

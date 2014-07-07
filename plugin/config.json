@@ -1,4 +1,8 @@
 {
 	"assetDirectory": "app",
-	"indexFile": "index.html"
+	"views": {
+		"200": "index",
+		"500": "error"
+	},
+	"templateDirectory": "templates"
 }

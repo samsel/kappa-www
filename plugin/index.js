@@ -41,7 +41,7 @@ module.exports = {
 
         plugin.ext('onPostHandler', function(req, reply) {
             if (utils.shouldRenderHtml(req)) {
-                reply.view(utils.indexFile, {
+                reply.view(utils.viewForStatus(req.response.output.statusCode), {
                     path: req.path,
                     data: req.response.output
                 });
