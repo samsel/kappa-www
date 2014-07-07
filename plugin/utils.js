@@ -22,4 +22,5 @@ module.exports.viewForStatus = function (statusCode) {
 
 module.exports.assestRoute = '/'  + config.assetDirectory + '/{path*}';
 module.exports.assestPath  = './' + config.assetDirectory;
+module.exports.layoutFile  = config.layoutFile;
 module.exports.viewPath    = './' + config.assetDirectory + '/' + config.templateDirectory;

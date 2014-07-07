@@ -4,5 +4,6 @@
 		"200": "index",
 		"500": "error"
 	},
-	"templateDirectory": "templates"
+	"templateDirectory": "templates",
+	"layoutFile": "layout"
 }

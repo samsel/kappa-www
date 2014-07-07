@@ -4,6 +4,10 @@ var pkg = require('../package'),
     handlebars = require('handlebars'),
     utils = require('./utils');
 
+handlebars.registerHelper('json', function(context) {
+    return JSON.stringify(context);
+});    
+
 module.exports = {
 
     name: pkg.name,
@@ -15,7 +19,8 @@ module.exports = {
         plugin.views({
             engines: {
                 html: {
-                    module: handlebars
+                    module: handlebars,
+                    //layout: utils.layoutFile
                 }
             },
             path: utils.viewPath
@@ -41,10 +46,11 @@ module.exports = {
 
         plugin.ext('onPostHandler', function(req, reply) {
             if (utils.shouldRenderHtml(req)) {
-                reply.view(utils.viewForStatus(req.response.output.statusCode), {
-                    path: req.path,
-                    data: req.response.output
-                });
+                reply.view(utils.viewForStatus(req.response.output.statusCode), 
+                    {
+                        title: options.title,
+                        data: req.response.output
+                    });
                 return;
             }
 
