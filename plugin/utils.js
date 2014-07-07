@@ -40,6 +40,6 @@ module.exports.assestPath = (function () {
 	return './' + assetDir;
 }());
 
-module.exports.indexFile = (function () {
-		return path.normalize(__dirname + '/../' + assetDir + '/index.html');
-}());
+module.exports.indexFile = 'index.html';
+
+module.exports.viewPath = ('./' + assetDir);

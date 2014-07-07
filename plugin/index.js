@@ -1,6 +1,7 @@
 'use strict';
 
 var pkg = require('../package'),
+    handlebars = require('handlebars'),
     utils = require('./utils');
 
 module.exports = {
@@ -10,6 +11,15 @@ module.exports = {
     version: pkg.version,
 
     register: function (plugin, options, next) {
+
+        plugin.views({
+            engines: {
+                html: {
+                    module: handlebars
+                }
+            },
+            path: utils.viewPath
+        });        
 
         plugin.route({
             method: 'GET',
@@ -33,7 +43,10 @@ module.exports = {
 
         plugin.ext('onPostHandler', function(req, reply) {
             if (utils.isHtmlRequest(req) && !utils.isAssetRequest(req)) {
-                reply.file(utils.indexFile);
+                reply.view(utils.indexFile, {
+                    path: req.path,
+                    data: req.response.output
+                });
                 return;
             }
 
@@ -43,8 +56,3 @@ module.exports = {
         next();
     }
 };
-
-// reply({
-//     path: request.path,
-//     output: request.response.output
-// });
