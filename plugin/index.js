@@ -35,14 +35,12 @@ module.exports = {
         });
 
         plugin.ext('onRequest', function(req, next) {
-            if (utils.isHtmlRequest(req) && utils.isAssetRequest(req)) {
-                req.setUrl(utils.assestPathForPath(req.path));
-            } 
+            utils.setLocals(req);
             next();
         });
 
         plugin.ext('onPostHandler', function(req, reply) {
-            if (utils.isHtmlRequest(req) && !utils.isAssetRequest(req)) {
+            if (utils.shouldRenderHtml(req)) {
                 reply.view(utils.indexFile, {
                     path: req.path,
                     data: req.response.output

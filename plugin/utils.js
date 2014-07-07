@@ -1,45 +1,33 @@
 var Negotiator = require('negotiator'),
 	path = require('path'),
-	assetDir = 'app',
-	assets = ['javascripts', 'css', 'templates'];
+	config = require('./config');
 
-module.exports.isHtmlRequest = function (req) {
-	var negotiator;
+'use strict';	
+
+module.exports.setLocals = function (req) {
+	var negotiator = new Negotiator(req.raw.req);
 	req.locals = req.locals || {};
-
-	if (!req.locals.hasOwnProperty('htmlRequest')) {
-		negotiator = new Negotiator(req.raw.req);
-		req.locals.htmlRequest = (negotiator.mediaType() === 'text/html');
-	}
-
-	return req.locals.htmlRequest;
+	req.locals.htmlRequest = (negotiator.mediaType() === 'text/html');
+	req.locals.assetRequest = req.path.indexOf(config.assetDirectory + '/') !== -1;
 };
 
-module.exports.isAssetRequest = function (req) {
-	req.locals = req.locals || {};
-
-	if (!req.locals.hasOwnProperty('assetRequest')) {
-		req.locals.assetRequest = false;
-		for (var i = 0; (i < assets.length && !req.locals.assetRequest); i+=1) {
-			req.locals.assetRequest = req.path.indexOf(assets[i] + '/') !== -1; 
-		}
-	}
-
-	return req.locals.assetRequest;
+module.exports.shouldRenderHtml = function (req) {
+	return req.locals.htmlRequest && 
+			!req.locals.assetRequest;
 };
 
 module.exports.assestPathForPath = function (path) {
-	return '/' + assetDir + '/' + path;
+	return '/' + config.assetDirectory + '/' + path;
 };
 
 module.exports.assestRoute = (function () {
-	return '/' + assetDir + '/{path*}';
+	return '/' + config.assetDirectory + '/{path*}';
 }());
 
 module.exports.assestPath = (function () {
-	return './' + assetDir;
+	return './' + config.assetDirectory;
 }());
 
-module.exports.indexFile = 'index.html';
+module.exports.indexFile = config.indexFile;
 
-module.exports.viewPath = ('./' + assetDir);
+module.exports.viewPath = ('./' + config.assetDirectory);
