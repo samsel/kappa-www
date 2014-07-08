@@ -39,17 +39,12 @@ module.exports = {
             }
         });
 
-        plugin.ext('onRequest', function(req, next) {
-            utils.setLocals(req);
-            next();
-        });
-
-        plugin.ext('onPostHandler', function(req, reply) {
+        plugin.ext('onPreResponse', function(req, reply) {
             if (utils.shouldRenderHtml(req)) {
-                reply.view(utils.viewForStatus(req.response.output.statusCode), 
+                reply.view(utils.viewForRequest(req), 
                     {
                         title: options.title,
-                        data: req.response.output
+                        data: req.response.source
                     });
                 return;
             }
