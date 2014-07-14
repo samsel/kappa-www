@@ -19,11 +19,13 @@ module.exports = {
         plugin.views({
             engines: {
                 html: {
-                    module: handlebars,
+                    module: handlebars
                     //layout: utils.layoutFile
                 }
             },
-            path: utils.viewPath
+            partialsPath: utils.viewPath,
+            path: utils.viewPath,
+            isCached: false
         });        
 
         plugin.route({

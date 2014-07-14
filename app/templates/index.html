@@ -3,13 +3,17 @@
 <head>
 	<title>{{title}}</title>
 	<link rel="stylesheet" type="text/css" href="app/components/bootstrap/dist/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="app/components/Bootflat/bootflat/css/bootflat.css" />
+	<link rel="stylesheet" type="text/css" href="app/css/index.css" />
 </head>
 <body>
-	<div class="container">
-		<div class="well">
-			<h1>{{title}}</h1>
-			<p>{{json data}}</p>
-		</div>	
+	<div class="container-full">
+		<div class="row">
+			{{> partials/header }}				
+		</div>
+		<div class="row">
+			<p>{{json data}}</p>			
+		</div>			
 	</div>
     <script src="app/javascripts/index.js"></script>
 </body>

@@ -19,6 +19,7 @@
   "dependencies": {
     "jquery": "~2.1.1",
     "requirejs": "~2.1.14",
+    "Bootflat": "~2.0.3",
     "bootstrap": "~3.2.0"
   }
 }
