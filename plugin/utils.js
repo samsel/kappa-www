@@ -21,16 +21,7 @@ var utils = {
 
 module.exports.shouldRenderHtml = function (req) {
 	return utils.isHtmlRequest(req) && 
-			!utils.isAssetRequest(req) &&
-			utils.isPlainResponse(req);
-};
-
-module.exports.viewForRequest = function (req) {
-    if (req.response.isBoom) {
-        return config.views['500'];
-    }
-
-	return config.views['200'];	
+			!utils.isAssetRequest(req);
 };
 
 module.exports.assestRoute = '/'  + config.assetDirectory + '/{path*}';

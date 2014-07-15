@@ -1,9 +1,5 @@
 {
 	"assetDirectory": "app",
-	"views": {
-		"200": "index",
-		"500": "error"
-	},
 	"templateDirectory": "templates",
 	"layoutFile": "layout"
 }

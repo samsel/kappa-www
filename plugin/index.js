@@ -2,7 +2,7 @@
 
 var pkg = require('../package'),
     handlebars = require('handlebars'),
-    registry = require('./registry'),
+    renderer = require('./renderer'),
     utils = require('./utils');
 
 handlebars.registerHelper('json', function(context) {
@@ -16,6 +16,8 @@ module.exports = {
     version: pkg.version,
 
     register: function (plugin, options, next) {
+
+        renderer.setLocals(options);
 
         plugin.views({
             engines: {
@@ -42,20 +44,23 @@ module.exports = {
             }
         });
 
-        plugin.ext('onPreResponse', function(req, reply) {
+        plugin.ext('onRequest', function(req, reply) {
             if (utils.shouldRenderHtml(req)) {
-                var page = parseInt(req.query.page || 0);
-                reply.view(utils.viewForRequest(req), 
-                    {
-                        title: options.title,
-                        packages: registry.list(page),
-                        nextPage: page + 1
-                    });
+                renderer.render(req, reply);
                 return;
             }
 
             reply();
-        });             
+        });
+
+        plugin.ext('onPreResponse', function(req, reply) {
+            if (utils.shouldRenderHtml(req)) {            
+                renderer.render(req, reply);
+                return;
+            }
+
+            reply();
+        });                     
 
         next();
     }
