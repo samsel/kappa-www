@@ -7,6 +7,33 @@
 	border-color: #4A89DC;
 }
 
+.navbar-brand, .navbar-brand:hover {
+	color: #F5F7FA !important;
+	padding-left: 40px;
+}
+
 .media {
 	border-bottom: 1px solid #CCD1D9; 
+}
+
+.media p {
+	margin: 0;
+}
+
+.footer {
+	margin-top: 10px;
+	height: 10px;
+	padding: 0;
+}
+
+.author {
+	color: #656D78;
+}
+
+.url {
+	color: #3BAFDA;
+}
+
+.next {
+	font-size: 16px;
 }

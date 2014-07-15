@@ -1,25 +1,21 @@
 <div class="row">
 	<div class="col-md-1 col-lg-1"></div>
 	<div class="col-md-10 col-lg-10">
-		<div class="jumbotron">
-			<div class="jumbotron-contents">
-				<ul class="media-list">
-					{{#each packages}}
-						<li class="media">
-							<div class="media-body">
-								<a href="/{{name}}"><h4 class="media-heading">{{name}}</h4></a>
-								<p>
-									{{author.name}}
-									<br>
-									{{repository.url}}
-								</p>
-								<p>{{description}}</p>
-							</div>
-						</li>
-					{{/each}}
-				</ul>
-			</div>
-		</div>
-		<hr>
+		<ul class="media-list">
+			{{#each packages}}
+				<li class="media">
+					<div class="media-body">
+						<a href="/{{name}}"><h4 class="media-heading">{{name}}</h4></a>
+						<p>
+							<span class="author">{{author.name}}</span>
+							<br>
+							<span class="url">{{repository.url}}</span>
+						</p>
+						<p>{{description}}</p>
+					</div>
+				</li>
+			{{/each}}
+		</ul>
+		<a href="/?page={{nextPage}}" class="pull-right next">Next</a>
 	</div>			
 </div>

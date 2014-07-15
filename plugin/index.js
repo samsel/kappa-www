@@ -44,10 +44,12 @@ module.exports = {
 
         plugin.ext('onPreResponse', function(req, reply) {
             if (utils.shouldRenderHtml(req)) {
+                var page = parseInt(req.query.page || 0);
                 reply.view(utils.viewForRequest(req), 
                     {
                         title: options.title,
-                        packages: registry.list(req.query.page || 0)
+                        packages: registry.list(page),
+                        nextPage: page + 1
                     });
                 return;
             }
