@@ -10,7 +10,14 @@
 	{{> partials/header }}	
 	<div class="container">
 		{{> partials/search }}	
-		{{> partials/list }}		
+		<div class="row">
+			<div class="col-md-8 col-lg-8">
+				{{> partials/list }}
+				<a href="/?page={{nextPage}}" class="pull-right next">Next</a>	
+			</div>
+			<div class="col-md-4 col-lg-4">
+				{{> partials/stats }}
+			</div>	
 	</div>
 	<div class="footer"></div>
     <script src="app/javascripts/index.js"></script>
