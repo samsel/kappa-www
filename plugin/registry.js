@@ -10,3 +10,8 @@ module.exports.list = function (page) {
 
 	return _.values(_.pick(npm, keys.slice(start, end)));
 };
+
+module.exports.packageInfo = function () {
+
+	return npm[keys[0]];
+};

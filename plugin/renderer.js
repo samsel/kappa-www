@@ -21,12 +21,20 @@ module.exports.render = function render(req, reply) {
 		return;
 	}
 
+	if (req.url.pathname === '/') {
+		var page = parseInt(req.query.page || 0);
+		reply.view('index', {
+			title: locals.title,
+			packages: registry.list(page),
+			nextPage: page + 1
+		});	
 
-	var page = parseInt(req.query.page || 0);
-	reply.view(req.url.pathname === '/' ? 'index' : 'package', {
+		return;
+	}
+	
+	reply.view('package', {
 		title: locals.title,
-		packages: registry.list(page),
-		nextPage: page + 1
+		packageInfo: registry.packageInfo()
 	});	
 
 };

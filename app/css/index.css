@@ -37,3 +37,16 @@
 .next {
 	font-size: 16px;
 }
+
+/* override json.human.css */
+.jh-type-string {
+	color: #4A89DC;
+}
+
+.jh-type-object > tr:nth-child(odd), .jh-type-array > tr:nth-child(odd){
+    background-color: #FFF;
+}
+
+.jh-type-object > tr:nth-child(even), .jh-type-array > tr:nth-child(even){
+    background-color: #FFF;
+}

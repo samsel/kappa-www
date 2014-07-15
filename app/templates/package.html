@@ -4,23 +4,21 @@
 	<title>{{title}}</title>
 	<link rel="stylesheet" type="text/css" href="app/components/bootstrap/dist/css/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="app/components/Bootflat/bootflat/css/bootflat.css" />
+	<link rel="stylesheet" type="text/css" href="app/components/json-human/css/json.human.css" />
 	<link rel="stylesheet" type="text/css" href="app/css/index.css" />
 </head>
 <body>
 	{{> partials/header }}	
 	<div class="container">
-		{{> partials/search }}	
 		<div class="row">
 			<div class="col-md-8 col-lg-8">
-				{{> partials/list }}
-				<a href="/?page={{nextPage}}" class="pull-right next">Next</a>	
-			</div>
-			<div class="col-md-4 col-lg-4">
-				{{> partials/stats }}
+				{{> partials/package_info }}
 			</div>
 		</div>
 	</div>
 	<div class="footer"></div>
+	<script src="app/components/json-human/lib/crel.js"></script>
+	<script src="app/components/json-human/src/json.human.js"></script>	
     <script src="app/javascripts/index.js"></script>
 </body>
 </html>
