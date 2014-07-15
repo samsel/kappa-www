@@ -2,6 +2,7 @@
 
 var pkg = require('../package'),
     handlebars = require('handlebars'),
+    registry = require('./registry'),
     utils = require('./utils');
 
 handlebars.registerHelper('json', function(context) {
@@ -46,7 +47,7 @@ module.exports = {
                 reply.view(utils.viewForRequest(req), 
                     {
                         title: options.title,
-                        data: req.response.source
+                        packages: registry.list(req.query.page || 0)
                     });
                 return;
             }

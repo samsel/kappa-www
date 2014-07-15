@@ -1,0 +1,12 @@
+.navbar {
+	border-radius: 0;
+}
+
+.navbar-default {
+	background-color: #4A89DC;
+	border-color: #4A89DC;
+}
+
+.media {
+	border-bottom: 1px solid #CCD1D9; 
+}

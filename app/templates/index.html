@@ -7,13 +7,10 @@
 	<link rel="stylesheet" type="text/css" href="app/css/index.css" />
 </head>
 <body>
-	<div class="container-full">
-		<div class="row">
-			{{> partials/header }}				
-		</div>
-		<div class="row">
-			<p>{{json data}}</p>			
-		</div>			
+	{{> partials/header }}	
+	<div class="container">
+		{{> partials/search }}	
+		{{> partials/list }}		
 	</div>
     <script src="app/javascripts/index.js"></script>
 </body>
