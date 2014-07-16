@@ -52,8 +52,8 @@ module.exports = {
         });
 
         plugin.ext('onPreResponse', function(req, reply) {
-            if (utils.shouldRenderHtml(req)) {            
-                renderer.render(req, reply);
+            if (req.response && req.response.isBoom && utils.shouldRenderHtml(req)) {            
+                renderer.renderError(req, reply);
                 return;
             }
 

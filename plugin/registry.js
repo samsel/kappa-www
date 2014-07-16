@@ -65,7 +65,7 @@ module.exports.packageInfo = function (name, callback) {
 			throw err;
 			return;
 		}
-
+		
 		callback(data);
 
 	});

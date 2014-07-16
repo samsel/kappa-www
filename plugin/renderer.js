@@ -10,17 +10,15 @@ module.exports.setup = function render(_options, callback) {
 	registry.setup(_options, callback);
 };
 
+module.exports.renderError = function render(req, reply) {		
+	reply.view('error', {
+		title: options.title,
+		error: 'fatal error'
+	});
+};
+
 
 module.exports.render = function render(req, reply) {
-
-	if (req.response && req.response.isBoom) {
-		data.title = options.title;
-		reply.view('error', {
-			error: 'fatal error'
-		});
-
-		return;
-	}
 
 	if (req.url.pathname === '/') {
 		var page = parseInt(req.query.page || 0);
