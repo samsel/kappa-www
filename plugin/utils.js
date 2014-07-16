@@ -23,6 +23,15 @@ module.exports.shouldRenderHtml = function (req) {
 			!utils.isAssetRequest(req);
 };
 
+module.exports.isSearchRequest = function (req) {
+	return utils.isHtmlRequest(req) && 
+			req.url.pathname.indexOf('/-/search') !== -1;
+};
+
+module.exports.searchKeyFromRequest = function (req) {
+	return req.url.pathname.split('/').pop();
+};
+
 module.exports.assestRoute = '/'  + config.directory.asset + '/{path*}';
 module.exports.assestPath  = './' + config.directory.asset;
 module.exports.layoutFile  = config.layoutFile;

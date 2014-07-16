@@ -40,9 +40,14 @@ module.exports = {
                     index: true
                 }
             }
-        });
+        });          
 
         plugin.ext('onRequest', function(req, reply) {
+            if (utils.isSearchRequest(req)) {
+                renderer.search(req, reply);
+                return;
+            }
+
             if (utils.shouldRenderHtml(req)) {
                 renderer.render(req, reply);
                 return;

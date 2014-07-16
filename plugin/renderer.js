@@ -5,12 +5,12 @@ var registry = require('./registry'),
     options;
 
 
-module.exports.setup = function render(_options, callback) {
+module.exports.setup = function (_options, callback) {
 	options = _options;
 	registry.setup(_options, callback);
 };
 
-module.exports.renderError = function render(req, reply) {		
+module.exports.renderError = function (req, reply) {		
 	reply.view('error', {
 		title: options.title,
 		error: 'fatal error'
@@ -18,7 +18,7 @@ module.exports.renderError = function render(req, reply) {
 };
 
 
-module.exports.render = function render(req, reply) {
+module.exports.render = function (req, reply) {
 
 	if (req.url.pathname === '/') {
 		var page = parseInt(req.query.page || 0);
@@ -40,4 +40,12 @@ module.exports.render = function render(req, reply) {
 		});	
 	});	
 
+};
+
+module.exports.search = function (req, reply) {
+	registry.search(utils.searchKeyFromRequest(req), function (packages) {
+		reply({
+			packages: packages
+		});
+	});
 };
