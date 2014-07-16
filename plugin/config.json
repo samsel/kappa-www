@@ -1,5 +1,11 @@
 {
-	"assetDirectory": "app",
-	"templateDirectory": "templates",
-	"layoutFile": "layout"
+	"directory": {
+		"asset": "app",
+		"template": "templates",
+		"cache": "cache"
+
+	},
+	"layoutFile": "layout",
+	"syncInterval": 3600,
+	"pageSize": 10
 }

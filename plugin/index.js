@@ -17,8 +17,6 @@ module.exports = {
 
     register: function (plugin, options, next) {
 
-        renderer.setLocals(options);
-
         plugin.views({
             engines: {
                 html: {
@@ -60,8 +58,9 @@ module.exports = {
             }
 
             reply();
-        });                     
+        });
 
-        next();
+        renderer.setup(options, next);                    
+
     }
 };

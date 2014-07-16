@@ -2,18 +2,19 @@
 
 var registry = require('./registry'),
     utils = require('./utils'),
-    locals = {};
+    options;
 
 
-module.exports.setLocals = function render(data) {
-	locals.title = data.title;
+module.exports.setup = function render(_options, callback) {
+	options = _options;
+	registry.setup(_options, callback);
 };
 
 
 module.exports.render = function render(req, reply) {
 
 	if (req.response && req.response.isBoom) {
-		data.title = locals.title;
+		data.title = options.title;
 		reply.view('error', {
 			error: 'fatal error'
 		});
@@ -23,18 +24,22 @@ module.exports.render = function render(req, reply) {
 
 	if (req.url.pathname === '/') {
 		var page = parseInt(req.query.page || 0);
-		reply.view('index', {
-			title: locals.title,
-			packages: registry.list(page),
-			nextPage: page + 1
-		});	
+		registry.list(page, function (packages) {
+			reply.view('index', {
+				title: options.title,
+				packages: packages,
+				nextPage: page + 1
+			});	
+		});
 
 		return;
 	}
-	
-	reply.view('package', {
-		title: locals.title,
-		packageInfo: registry.packageInfo()
+
+	registry.packageInfo(req.url.pathname.slice(1, req.url.pathname.length), function (info) {
+		reply.view('package', {
+			title: options.title,
+			packageInfo: info
+		});	
 	});	
 
 };
