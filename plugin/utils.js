@@ -9,6 +9,10 @@ var utils = {
 		return (negotiator.mediaType() === 'text/html');
 	},
 
+	isXHRRequest: function (req) {
+		return (req.headers['x-requested-with'] === 'XMLHttpRequest');
+	},
+
 	isAssetRequest: function (req) {
 		return req.path.indexOf(config.directory.asset + '/') !== -1;
 	},
@@ -24,8 +28,8 @@ module.exports.shouldRenderHtml = function (req) {
 };
 
 module.exports.isSearchRequest = function (req) {
-	return utils.isHtmlRequest(req) && 
-			req.url.pathname.indexOf('/-/search') !== -1;
+	return utils.isXHRRequest(req) && 
+			req.url.pathname.indexOf(config.searchUrl) !== -1;
 };
 
 module.exports.searchKeyFromRequest = function (req) {

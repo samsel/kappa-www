@@ -1,6 +1,7 @@
 'use strict';
 
 var registry = require('./registry'),
+	config = require('./config'),
     utils = require('./utils'),
     options;
 
@@ -25,6 +26,7 @@ module.exports.render = function (req, reply) {
 		registry.list(page, function (packages) {
 			reply.view('index', {
 				title: options.title,
+				searchUrl: config.searchUrl,
 				packages: packages,
 				nextPage: page + 1
 			});	
