@@ -14,7 +14,8 @@ var _ = require('underscore'),
 
 function initLocalNPM() {
 	npm.load({
-		loaded: false
+		loaded: false,
+		registry: options.registry
 		}, 
 		function (err) {
 			if (err) {
