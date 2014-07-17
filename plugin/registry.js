@@ -8,7 +8,7 @@ var _ = require('underscore'),
 	client,
 	connectionConfig = {
 		timeout: 1000,
-		staleOk: true
+		staleOk: false
 	};
 
 
