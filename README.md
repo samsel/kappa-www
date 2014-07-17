@@ -30,11 +30,12 @@ kappa-ui
         "kappa-ui": {
             "vhost": "localhost",
             "title": "My Orgs Private NPM Browser"
+            "registry": "http://npm.myorg.com/"
         },
         "kappa": {
             "vhost": "localhost",
             "paths": [
-                "http://npm.org.com/",
+                "http://npm.myorg.com/",
                 "https://registry.npmjs.org/"
             ]
         }
@@ -44,7 +45,14 @@ kappa-ui
 
 ```shell
 $ npm start
-$ open http://localhost:8000/pphcore
+$ open http://localhost:8000/<private_package_name>
 ````
 
-
+## Todo
+--------
+* handle errors properly
+* remove the stupid ```if err``` in the code and write it nice n clean
+* asset packaging
+* user management
+* elastic search
+* redis cache
