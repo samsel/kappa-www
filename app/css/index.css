@@ -42,9 +42,12 @@ html, body {
 	font-size: 16px;
 }
 
+#packagePage {
+  min-height: 100%;
+}
+
 #info {
   display: none;
-  height: 80%;
 }
 
 /* override json.human.css */
