@@ -9,17 +9,17 @@
 </head>
 <body>
 	{{> partials/header }}	
-	<div class="container">
+	<div id="packagePage" class="container">
 		<div class="row">
 			<div class="col-md-8 col-lg-8">
-				{{> partials/package_info }}
+				<div id="info"></div>
 			</div>
 		</div>
 	</div>
 	<div class="footer"></div>
-	<script src="app/components/jquery/dist/jquery.js"></script>
-	<script src="app/components/json-human/lib/crel.js"></script>
-	<script src="app/components/json-human/src/json.human.js"></script>	
-    <script src="app/javascripts/index.js"></script>
+	<script>
+		window.packageInfo = {{{json packageInfo}}};
+	</script>
+    <script data-main="app/javascripts/config" src="app/components/requirejs/require.js"></script>
 </body>
 </html>

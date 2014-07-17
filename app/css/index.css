@@ -1,3 +1,7 @@
+html, body {
+  height: 100%;
+}
+
 .navbar {
 	border-radius: 0;
 }
@@ -36,6 +40,11 @@
 
 .next {
 	font-size: 16px;
+}
+
+#info {
+  display: none;
+  height: 80%;
 }
 
 /* override json.human.css */

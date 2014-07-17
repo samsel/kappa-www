@@ -1,7 +1,0 @@
-<div id="info"></div>
-<script>
-	window.packageInfo = {{{json packageInfo}}};
-	document.addEventListener("DOMContentLoaded", function onDom(evt) {
-		document.getElementById('info').appendChild(JsonHuman.format(window.packageInfo));
-	}, false);	
-</script>

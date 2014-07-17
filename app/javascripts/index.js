@@ -1,39 +1,13 @@
-define(['jquery', 'typeahead'], function ($) {
+define(['jquery'], function ($) {
 
-	var app = function () {
-		var searchInput = $('#search');
-		
-		if (searchInput.length) {
-			var url = searchInput.attr('data-url');
+	$(function () {
 
-			searchInput.on('typeahead:selected', function () {
-				window.location.href = '/' + searchInput.val();
-			});
+		var pages = ['searchPage', 'packagePage'];
 
-			searchInput.typeahead({
-			  minLength: 1
-			},
-			{
-				name: 'packages',
-				displayKey: 'name',
-				source: function(query, process) {
-
-					var xhr = $.ajax({
-						url: url + query,
-						method: "GET"
-					});
-
-					xhr.done(function () {		
-						process(xhr.responseJSON.packages);
-					});					
-
-					xhr.fail(function () {
-						console.error(" oops! not good enough to handle like this :(- ");
-					});
-				}
-			});	
-		}
-	};
-
-	$(app);
+		pages.forEach(function(page) {
+			if ($('#' + page).length) {
+				require([page]);
+			}
+		});
+	});
 });
