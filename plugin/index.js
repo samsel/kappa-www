@@ -1,13 +1,8 @@
 'use strict';
 
 var pkg = require('../package'),
-    handlebars = require('handlebars'),
     renderer = require('./renderer'),
-    utils = require('./utils');
-
-handlebars.registerHelper('json', function(context) {
-    return JSON.stringify(context);
-});    
+    utils = require('./utils'); 
 
 module.exports = {
 
@@ -20,7 +15,7 @@ module.exports = {
         plugin.views({
             engines: {
                 html: {
-                    module: handlebars
+                    module: renderer.engine
                     //layout: utils.layoutFile
                 }
             },

@@ -104,7 +104,7 @@ module.exports.search = function (key, callback) {
 			keys = Object.keys(data);
 
 		for (var i = 0; i <= keys.length; i+=1) {
-			if (i === config.maxSearchResults) {
+			if (i === config.search.maxResults) {
 				break;
 			}
 
@@ -112,6 +112,7 @@ module.exports.search = function (key, callback) {
 			// this chk safety is to protect against 
 			// undefined coming from the search data!
 			if (_package) {
+				// send back just the package name
 				results.push(_.pick(_package, 'name'));
 			}
 		}

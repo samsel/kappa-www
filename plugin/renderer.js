@@ -1,10 +1,12 @@
 'use strict';
 
 var registry = require('./registry'),
+	templater = require('./templater'),
 	config = require('./config'),
     utils = require('./utils'),
     options;
 
+module.exports.engine = templater.engine;
 
 module.exports.setup = function (_options, callback) {
 	options = _options;
@@ -26,7 +28,7 @@ module.exports.render = function (req, reply) {
 		registry.list(page, function (packages) {
 			reply.view('index', {
 				title: options.title,
-				searchUrl: config.searchUrl,
+				searchUrl: config.search.url,
 				packages: packages,
 				nextPage: page + 1
 			});	

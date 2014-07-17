@@ -29,7 +29,7 @@ module.exports.shouldRenderHtml = function (req) {
 
 module.exports.isSearchRequest = function (req) {
 	return utils.isXHRRequest(req) && 
-			req.url.pathname.indexOf(config.searchUrl) !== -1;
+			req.url.pathname.indexOf(config.search.url) !== -1;
 };
 
 module.exports.searchKeyFromRequest = function (req) {
