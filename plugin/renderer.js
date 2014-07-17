@@ -45,9 +45,14 @@ module.exports.render = function (req, reply) {
 };
 
 module.exports.search = function (req, reply) {
-	registry.search(utils.searchKeyFromRequest(req), function (packages) {
+	registry.search(utils.searchKeyFromRequest(req), function (packageNames) {
+		packageNames = packageNames.map(function(name) {
+			return {
+				name: name
+			};
+		})
 		reply({
-			packages: packages
+			packages: packageNames.slice(0,10) //send only ten results
 		});
 	});
 };

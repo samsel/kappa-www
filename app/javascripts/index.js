@@ -1,28 +1,36 @@
 var app = function () {
 	var searchInput = $('#search');
+	
 	if (searchInput.length) {
-
 		var url = searchInput.attr('data-url');
 
-		searchInput.on('keyup', function (e) {
+		searchInput.on('typeahead:selected', function () {
+			window.location.href = '/' + searchInput.val();
+		});
 
-			// start searching only if the user
-			// enters more that one character.
-			if (searchInput.val().length > 1) {
+		searchInput.typeahead({
+		  minLength: 1
+		},
+		{
+			name: 'packages',
+			displayKey: 'name',
+			source: function(query, process) {
+
 				var xhr = $.ajax({
-					url: url + searchInput.val(),
+					url: url + query,
 					method: "GET"
 				});
 
 				xhr.done(function () {		
 					console.log(xhr.responseJSON.packages);
-				});
+					process(xhr.responseJSON.packages);
+				});					
 
 				xhr.fail(function () {
 					console.error(" oops! not good enough to handle like this :(- ");
 				});
 			}
-		});
+		});	
 	}
 };
 
