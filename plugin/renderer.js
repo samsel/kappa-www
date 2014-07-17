@@ -22,7 +22,7 @@ module.exports.renderError = function (req, reply) {
 module.exports.render = function (req, reply) {
 
 	if (req.url.pathname === '/') {
-		var page = parseInt(req.query.page || 0);
+		var page = parseInt(req.query.page || 0, 10);
 		registry.list(page, function (packages) {
 			reply.view('index', {
 				title: options.title,
@@ -45,14 +45,9 @@ module.exports.render = function (req, reply) {
 };
 
 module.exports.search = function (req, reply) {
-	registry.search(utils.searchKeyFromRequest(req), function (packageNames) {
-		packageNames = packageNames.map(function(name) {
-			return {
-				name: name
-			};
-		})
+	registry.search(utils.searchKeyFromRequest(req), function (packages) {
 		reply({
-			packages: packageNames.slice(0,10) //send only ten results
+			packages: packages
 		});
 	});
 };

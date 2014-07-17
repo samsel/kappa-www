@@ -100,6 +100,22 @@ module.exports.search = function (key, callback) {
 			throw err;
 		}
 
-		callback(Object.keys(data));
+		var results = [],
+			keys = Object.keys(data);
+
+		for (var i = 0; i <= keys.length; i+=1) {
+			if (i === config.maxSearchResults) {
+				break;
+			}
+
+			var _package = data[keys[i]];
+			// this chk safety is to protect against 
+			// undefined coming from the search data!
+			if (_package) {
+				results.push(_.pick(_package, 'name'));
+			}
+		}
+
+		callback(results);
 	});
 };

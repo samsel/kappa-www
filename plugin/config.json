@@ -8,5 +8,6 @@
 	"layoutFile": "layout",
 	"syncInterval": 3600,
 	"pageSize": 10,
-	"searchUrl": "/-/search/"
+	"searchUrl": "/-/search/",
+	"maxSearchResults": 10
 }
