@@ -12,7 +12,7 @@ define(['jquery', 'typeahead'], function ($) {
 	},
 	{
 		name: 'packages',
-		displayKey: 'name',
+		displayKey: '_id',
 		source: function(query, process) {
 
 			var xhr = $.ajax({

@@ -1,4 +1,5 @@
 var _ = require('underscore'),
+	search = require('./search'),
 	npm = require('npm'),
 	Registry = require('npm-registry-client'),
 	npmconf = require('npmconf'),
@@ -96,28 +97,7 @@ module.exports.packageInfo = function (name, callback) {
 };
 
 module.exports.search = function (key, callback) {
-	npm.commands.search([key], function (err, data) {
-		if (err) {
-			throw err;
-		}
-
-		var results = [],
-			keys = Object.keys(data);
-
-		for (var i = 0; i <= keys.length; i+=1) {
-			if (i === config.search.maxResults) {
-				break;
-			}
-
-			var _package = data[keys[i]];
-			// this chk safety is to protect against 
-			// undefined coming from the search data!
-			if (_package) {
-				// send back just the package name
-				results.push(_.pick(_package, 'name'));
-			}
-		}
-
+	search(key, function (err, results) {
 		callback(results);
-	});
+	}); 
 };
