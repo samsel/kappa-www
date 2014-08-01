@@ -1,5 +1,18 @@
-kappa-ui
-========
+kappa-www
+=========
+
+## prerequisites
+----------------
+* Make sure that the following things are installed in your system
+* Java
+* Elasticsearch (installed and running on port 9200)
+* bower, node module (installed globally)
+* npm2es, node module (installed globally)
+* before you configure and start kappa-www, index your private registry into elasticsearch by running the below command
+
+```shell
+$ npm2es --couch="http://ip_address:port/registry/" --es="http://localhost:9200/npm"
+```
 
 ## usage
 --------
@@ -12,7 +25,7 @@ kappa-ui
   },
   "dependencies": {
     "kappa": "0.14.3",
-    "kappa-ui": "0.0.1"
+    "kappa-www": "0.0.1"
   }
 }
 ```
@@ -30,7 +43,11 @@ kappa-ui
         "kappa-ui": {
             "vhost": "localhost",
             "title": "My Orgs Private NPM Browser"
-            "registry": "http://npm.myorg.com/"
+            "registry": "http://npm.myorg.com/",
+            "elasticsearch": {
+                "url": "http://localhost:9200/",
+                "index": "npm"
+            }            
         },
         "kappa": {
             "vhost": "localhost",
@@ -45,7 +62,7 @@ kappa-ui
 
 ```shell
 $ npm start
-$ open http://localhost:8000/<private_package_name>
+$ open http://localhost:8000/
 ````
 
 ## Todo
