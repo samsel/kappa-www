@@ -25,7 +25,7 @@ $ npm2es --couch="http://ip_address:port/registry/" --es="http://localhost:9200/
   },
   "dependencies": {
     "kappa": "0.14.3",
-    "kappa-www": "0.0.1"
+    "kappa-www": "git@github.com:samsel/kappa-www.git#master"
   }
 }
 ```
@@ -40,7 +40,7 @@ $ npm2es --couch="http://ip_address:port/registry/" --es="http://localhost:9200/
         }
     ],
     "plugins": {
-        "kappa-ui": {
+        "kappa-www": {
             "vhost": "localhost",
             "title": "My Orgs Private NPM Browser"
             "registry": "http://npm.myorg.com/",
@@ -71,5 +71,5 @@ $ open http://localhost:8000/
 * remove the stupid ```if err``` in the code and write it nice n clean
 * asset packaging
 * user management
-* elastic search
+* tune elastic search
 * redis cache
