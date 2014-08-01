@@ -10,6 +10,6 @@
 	"pageSize": 10,
 	"search": {
 		"url": "/-/search/",
-		"maxResults": 10
+		"maxResults": 15
 	}
 }

@@ -1,5 +1,6 @@
+'use strict';
+
 var _ = require('underscore'),
-	search = require('./search'),
 	npm = require('npm'),
 	Registry = require('npm-registry-client'),
 	npmconf = require('npmconf'),
@@ -29,15 +30,11 @@ function initLocalNPM() {
 	});
 }
 
-
-
-
 function sync(cb) {
 	var uri = options.registry + "-/all";
 	client.get(uri, connectionConfig, function (err, data, raw, res) {
 		if (err) {
 			throw err;
-			return;
 		}
 
 		if (typeof cb === 'function') {
@@ -53,7 +50,6 @@ module.exports.setup = function (_options, callback) {
 	npmconf.load({}, function (err, conf) {
 		if (err) {
 			throw err;
-			return;
 		}
 
 	  	conf.set('cache', path.resolve(__dirname + '/../' + config.directory.cache));
@@ -88,16 +84,9 @@ module.exports.packageInfo = function (name, callback) {
 	client.get(uri, connectionConfig, function (err, data, raw, res) {
 		if (err) {
 			throw err;
-			return;
 		}
 
 		callback(data);
 
 	});
-};
-
-module.exports.search = function (key, callback) {
-	search(key, function (err, results) {
-		callback(results);
-	}); 
 };

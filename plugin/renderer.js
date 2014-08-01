@@ -4,12 +4,14 @@ var registry = require('./registry'),
 	templater = require('./templater'),
 	config = require('./config'),
     utils = require('./utils'),
+    search,
     options;
 
 module.exports.engine = templater.engine;
 
 module.exports.setup = function (_options, callback) {
 	options = _options;
+	search = require('./search')(_options);
 	registry.setup(_options, callback);
 };
 
@@ -47,9 +49,9 @@ module.exports.render = function (req, reply) {
 };
 
 module.exports.search = function (req, reply) {
-	registry.search(utils.searchKeyFromRequest(req), function (packages) {
+	search(utils.searchKeyFromRequest(req), function (err, results) {
 		reply({
-			packages: packages
+			packages: results
 		});
 	});
 };
