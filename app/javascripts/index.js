@@ -4,7 +4,7 @@ define(['jquery'], function ($) {
 
 		var pages = ['searchPage', 'packagePage'];
 
-		pages.forEach(function(page) {
+		pages.forEach(function (page) {
 			if ($('#' + page).length) {
 				require([page]);
 			}

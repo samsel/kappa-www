@@ -29,7 +29,7 @@
 
     // Custom predefined globals.
     "predef": [
-        "describe", "it"
+        "describe", "it", "define", "requirejs", "window"
     ],
 
     // Development

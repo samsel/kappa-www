@@ -76,5 +76,4 @@ $ open http://localhost:8000/
 
 ## Misc
 --------
-
-###### To Lint: ```npm run lint```
+* To Lint: ```npm run lint```

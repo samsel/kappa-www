@@ -8,12 +8,12 @@ define(['jquery', 'typeahead'], function ($) {
 	});
 
 	searchInput.typeahead({
-	  minLength: 1
+		minLength: 1
 	},
 	{
 		name: 'packages',
 		displayKey: '_id',
-		source: function(query, process) {
+		source: function (query, process) {
 
 			var xhr = $.ajax({
 				url: url + query,
