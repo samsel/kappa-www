@@ -14,9 +14,9 @@ module.exports = function (options) {
 
         var searchQuery = {
             index: options.elasticsearch.index,
-            fields : ['name','description','author'],
+            fields: ['name', 'description', 'author'],
             size: config.search.maxResults,
-                body: {
+            body: {
                 "query" : {
                     "dis_max": {
                         "tie_breaker": 0.7,
@@ -45,12 +45,8 @@ module.exports = function (options) {
       
 
         client.search(searchQuery, function (error, response) {
-          if (error) {
-            throw error;
-          }
-             
-         callback(null, response.hits.hits);
+            if (error) { throw error; }
+            callback(null, response.hits.hits);
         });
     };
-
 };

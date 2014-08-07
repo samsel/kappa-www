@@ -37,7 +37,7 @@ module.exports = {
             }
         });          
 
-        plugin.ext('onRequest', function(req, reply) {
+        plugin.ext('onRequest', function (req, reply) {
             if (utils.isSearchRequest(req)) {
                 renderer.search(req, reply);
                 return;
@@ -51,7 +51,7 @@ module.exports = {
             reply();
         });
 
-        plugin.ext('onPreResponse', function(req, reply) {
+        plugin.ext('onPreResponse', function (req, reply) {
             if (req.response && req.response.isBoom && utils.shouldRenderHtml(req)) {            
                 renderer.renderError(req, reply);
                 return;

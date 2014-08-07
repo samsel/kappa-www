@@ -18,11 +18,11 @@ function initLocalNPM() {
 	npm.load({
 		loaded: false,
 		registry: options.registry
-		}, 
-		function (err) {
-			if (err) {
-				throw err;
-			}
+	}, 
+	function (err) {
+		if (err) {
+			throw err;
+		}
 
 		npm.on("log", function (message) {
 			console.log(message);
@@ -31,17 +31,12 @@ function initLocalNPM() {
 }
 
 function sync(cb) {
-	var uri = options.registry + "-/all";
-	client.get(uri, connectionConfig, function (err, data, raw, res) {
-		if (err) {
-			throw err;
-		}
-
-		if (typeof cb === 'function') {
-			cb(data);
-		}
-
-	});  	
+	var uri = options.registry + "-/all",
+	callback = function (err, data, raw, res) {
+		if (err) { throw err; }
+		if (typeof cb === 'function') { cb(data); }
+	}; 	
+	client.get(uri, connectionConfig, callback); 
 }
 
 module.exports.setup = function (_options, callback) {
@@ -51,10 +46,9 @@ module.exports.setup = function (_options, callback) {
 		if (err) {
 			throw err;
 		}
-
-	  	conf.set('cache', path.resolve(__dirname + '/../' + config.directory.cache));
-	  	conf.set('always-auth', false);
-	  	conf.set('strict-ssl', false);
+		conf.set('cache', path.resolve(__dirname + '/../' + config.directory.cache));
+		conf.set('always-auth', false);
+		conf.set('strict-ssl', false);
 
 		client = new Registry(conf);
 		//setInterval(sync, config.syncInterval);

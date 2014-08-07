@@ -73,3 +73,8 @@ $ open http://localhost:8000/
 * user management
 * tune elastic search
 * redis cache
+
+## Misc
+--------
+
+###### To Lint: ```npm run lint```
