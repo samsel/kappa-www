@@ -1,6 +1,10 @@
 kappa-www
 =========
 
+kappa-www is a web interface for the private npm registry reverse proxy - kappa[https://github.com/krakenjs/kappa].
+It is written as a Hapi Plugin to play nice with the kappa library to serve HTML responses to web based requests(from browsers).
+Refer to the Usage section below to understand how kappa-www can be configured and used with kappa.
+
 ## prerequisites
 ----------------
 * Make sure that the following things are installed in your system
