@@ -1,12 +1,11 @@
-var Negotiator = require('negotiator'),
-	config = require('./config');
+var config = require('./config');
 
 'use strict';
 
 var utils = {
-	isHtmlRequest: function (req) {
-		var negotiator = new Negotiator(req.raw.req);
-		return (negotiator.mediaType() === 'text/html');
+	isNonNPMClientBasedRequest: function (req) {
+		return req.headers['user-agent'] &&
+				req.headers['user-agent'].indexOf('npm/') === -1;
 	},
 
 	isXHRRequest: function (req) {
@@ -23,7 +22,7 @@ var utils = {
 };
 
 module.exports.shouldRenderHtml = function (req) {
-	return utils.isHtmlRequest(req) && 
+	return utils.isNonNPMClientBasedRequest(req) && 
 			!utils.isAssetRequest(req);
 };
 

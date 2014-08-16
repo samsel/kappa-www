@@ -74,18 +74,49 @@ test('kappa-www Utils', function (t) {
         t.end();
     });
 
-    // t.test('shouldRenderHtml method should return true for browser based requests that are not kappa-www web app resources paths' , function (t) {
-    //     var req = {
-    //         headers: {
-    //             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
-    //         },
-    //         method: 'GET',
-    //         url: {
-    //             pathname: '/some_package'
-    //         }
-    //     };
-    //     t.equal(Utils.shouldRenderHtml(req), true);
-    //     t.end();
-    // });                                     
+    t.test('shouldRenderHtml method should return true for browser based requests that are not kappa-www web app resources paths' , function (t) {
+        var req = {
+            headers: {
+                'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36'
+            },
+            method: 'GET',
+            path: '/some_package',
+            url: {
+                pathname: '/some_package'
+            }
+        };
+        t.equal(Utils.shouldRenderHtml(req), true);
+        t.end();
+    });
+
+    t.test('shouldRenderHtml method should return false for browser based requests that are kappa-www web app resources paths' , function (t) {
+        var req = {
+            headers: {
+                'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36'
+            },
+            method: 'GET',
+            path: config.directory.asset + '/' + config.directory.template + '/some_template',
+            url: {
+                pathname: config.directory.asset + '/' + config.directory.template + '/some_template'
+            }
+        };
+        t.equal(Utils.shouldRenderHtml(req), false);
+        t.end();
+    });
+
+    t.test('shouldRenderHtml method should return false for requests from npm client' , function (t) {
+        var req = {
+            headers: {
+                'user-agent': 'npm/1.4.14 node/v0.10.29 darwin x64'
+            },
+            method: 'GET',
+            path: '/some_package',
+            url: {
+                pathname: '/some_package'
+            }
+        };
+        t.equal(Utils.shouldRenderHtml(req), false);
+        t.end();
+    });                                              
 
 });
