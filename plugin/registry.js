@@ -32,10 +32,10 @@ function initLocalNPM() {
 
 function sync(cb) {
 	var uri = options.registry + "-/all",
-	callback = function (err, data, raw, res) {
-		if (err) { throw err; }
-		if (typeof cb === 'function') { cb(data); }
-	}; 	
+		callback = function (err, data, raw, res) {
+			if (err) { throw err; }
+			if (typeof cb === 'function') { cb(data); }
+		};
 	client.get(uri, connectionConfig, callback); 
 }
 
