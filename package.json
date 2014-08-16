@@ -5,7 +5,7 @@
   "main": "plugin/index.js",
   "scripts": {
     "postinstall": "node_modules/.bin/bower install --allow-root",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "tape test/*.js",
     "lint": "jshint -c .jshintrc plugin/*.js app/javascripts/*.js"
   },
   "keywords": [
@@ -18,7 +18,7 @@
   "engines": {
     "node": ">=0.10.12"
   },
-  "engineStrict": true,  
+  "engineStrict": true,
   "dependencies": {
     "bower": "^1.3.7",
     "elasticsearch": "^2.4.0",
@@ -31,9 +31,11 @@
     "underscore": "^1.6.0"
   },
   "devDependencies": {
+    "hapi": "^6.5.1",
     "jshint": "~2.4.4",
-    "tape": "~2.6.0"
-  },  
+    "kappa": "^0.14.3",
+    "tape": "^2.14.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/samsel/kappa-www.git"
