@@ -1,6 +1,6 @@
 {
 	"directory": {
-		"asset": "app",
+		"asset": "public",
 		"template": "templates",
 		"cache": "cache"
 

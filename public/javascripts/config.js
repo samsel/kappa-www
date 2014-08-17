@@ -6,7 +6,7 @@ define(function () {
 
         useStrict: true,
 
-        baseUrl: "/app",
+        baseUrl: "/public",
 
         paths: {
             'jquery': 'components/jquery/dist/jquery',
