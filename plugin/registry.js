@@ -62,8 +62,8 @@ module.exports.setup = function (_options, callback) {
 
 
 module.exports.list = function (page, callback) {
-	var start = page * config.pageSize,
-		end = start + config.pageSize;
+	var start = page * config.page.maxResults,
+		end = start + config.page.maxResults;
 
 	sync(function (packages) {
 		var keys = Object.keys(packages);

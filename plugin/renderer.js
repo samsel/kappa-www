@@ -4,8 +4,28 @@ var registry = require('./registry'),
 	templater = require('./templater'),
 	config = require('./config'),
     utils = require('./utils'),
-    search,
-    options;
+    search, options,
+    renderListPage, renderPackagePage;
+
+renderListPage = function (page, req, reply) {
+	registry.list(page, function (packages) {
+		reply.view('index', {
+			title: options.title,
+			searchUrl: config.search.url,
+			packages: packages,
+			nextPage: page + 1
+		});	
+	});	
+};
+
+renderPackagePage = function (req, reply) {
+	registry.packageInfo(req.url.pathname.slice(1, req.url.pathname.length), function (info) {
+		reply.view('package', {
+			title: options.title,
+			packageInfo: info
+		});	
+	});	
+};    
 
 module.exports.engine = templater.engine;
 
@@ -22,30 +42,26 @@ module.exports.renderError = function (req, reply) {
 	});
 };
 
-
 module.exports.render = function (req, reply) {
+	var path = req.url.pathname; 
 
-	if (req.url.pathname === '/') {
-		var page = parseInt(req.query.page || 0, 10);
-		registry.list(page, function (packages) {
-			reply.view('index', {
-				title: options.title,
-				searchUrl: config.search.url,
-				packages: packages,
-				nextPage: page + 1
-			});	
-		});
-
-		return;
+	if (path === '/') {
+		renderListPage(0, req, reply);
 	}
-
-	registry.packageInfo(req.url.pathname.slice(1, req.url.pathname.length), function (info) {
-		reply.view('package', {
-			title: options.title,
-			packageInfo: info
-		});	
-	});	
-
+	else if (path.indexOf(config.page.url) !== -1) {
+		var page = parseInt(path.replace(config.page.url, ''), 10);
+		if (isNaN(page)) {
+			// TODO: fix me: throw error or redirect to 
+			// index instead of rendering page 0
+			renderListPage(0, req, reply);
+		}
+		else {
+			renderListPage(page, req, reply);
+		}
+	}
+	else {
+		renderPackagePage(req, reply);
+	}
 };
 
 module.exports.search = function (req, reply) {

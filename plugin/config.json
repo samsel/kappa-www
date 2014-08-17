@@ -7,7 +7,10 @@
 	},
 	"layoutFile": "layout",
 	"syncInterval": 3600,
-	"pageSize": 10,
+	"page": {
+		"url": "/-/page/",
+		"maxResults": 10
+	},	
 	"search": {
 		"url": "/-/search/",
 		"maxResults": 15
