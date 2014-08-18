@@ -23,7 +23,7 @@ renderPackagePage = function (req, reply) {
 	registry.packageInfo(req.url.pathname.slice(1, req.url.pathname.length), function (_package) {
 		_package.readme = markdown.toHTML(_package.readme);
 		reply.view('package', {
-			title: options.title,
+			'title': options.title,
 			'package': _package
 		});	
 	});	

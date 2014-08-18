@@ -39,8 +39,10 @@ html, body {
 
 .footer {
 	margin-top: 10px;
-	height: 12px;
+	height: 5px;
 	padding: 0;
+  background-color: #4A89DC;
+  border-color: #4A89DC;  
 }
 
 .author {
