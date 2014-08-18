@@ -1,68 +1,68 @@
 html, body {
-  background-color: #6e6d71;
-  background-color: #fafafa;
-  background-image: -webkit-gradient(linear,0 0,0 100%,from(#ececec),color-stop(40%,#fcfcfc),to(#f0f0f0));
-  background-image: -webkit-linear-gradient(#ececec,#fcfcfc 40%,#f0f0f0);
-  background-image: -moz-linear-gradient(top,#ececec,#fcfcfc 4000%,#f0f0f0);
-  background-image: -o-linear-gradient(#ececec,#fcfcfc 40%,#f0f0f0);
-  background-image: linear-gradient(#ececec,#fcfcfc 40%,#f0f0f0);
-  background-repeat: no-repeat;
-  background-color: #fafafa;
-  background-image: -webkit-gradient(linear,0 0,0 100%,from(#ececec),color-stop(40%,#fcfcfc),to(#f0f0f0));
-  background-image: -webkit-linear-gradient(#ececec,#fcfcfc 40%,#f0f0f0);
-  background-image: -moz-linear-gradient(top,#ececec,#fcfcfc 40%,#f0f0f0);
-  background-image: -o-linear-gradient(#ececec,#fcfcfc 40%,#f0f0f0);
-  background-image: linear-gradient(#ececec,#fcfcfc 40%,#f0f0f0);
+    background-color: #6e6d71;
+    background-color: #fafafa;
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#ececec),color-stop(40%,#fcfcfc),to(#f0f0f0));
+    background-image: -webkit-linear-gradient(#ececec,#fcfcfc 40%,#f0f0f0);
+    background-image: -moz-linear-gradient(top,#ececec,#fcfcfc 4000%,#f0f0f0);
+    background-image: -o-linear-gradient(#ececec,#fcfcfc 40%,#f0f0f0);
+    background-image: linear-gradient(#ececec,#fcfcfc 40%,#f0f0f0);
+    background-repeat: no-repeat;
+    background-color: #fafafa;
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#ececec),color-stop(40%,#fcfcfc),to(#f0f0f0));
+    background-image: -webkit-linear-gradient(#ececec,#fcfcfc 40%,#f0f0f0);
+    background-image: -moz-linear-gradient(top,#ececec,#fcfcfc 40%,#f0f0f0);
+    background-image: -o-linear-gradient(#ececec,#fcfcfc 40%,#f0f0f0);
+    background-image: linear-gradient(#ececec,#fcfcfc 40%,#f0f0f0);
 }
 
 .navbar {
-	border-radius: 0;
+    border-radius: 0;
 }
 
 .navbar-default {
-	background-color: #4A89DC;
-	border-color: #4A89DC;
+    background-color: #4A89DC;
+    border-color: #4A89DC;
 }
 
 .navbar-brand, .navbar-brand:hover {
-	color: #F5F7FA !important;
-	padding-left: 40px;
+    color: #F5F7FA !important;
+    padding-left: 40px;
 }
 
 .media {
-	border-bottom: 1px solid #CCD1D9; 
+    border-bottom: 1px solid #CCD1D9; 
 }
 
 .media p {
-	margin: 0;
+    margin: 0;
 }
 
 .footer {
-	margin-top: 10px;
-	height: 5px;
-	padding: 0;
-  background-color: #4A89DC;
-  border-color: #4A89DC;  
+    margin-top: 10px;
+    height: 5px;
+    padding: 0;
+    background-color: #4A89DC;
+    border-color: #4A89DC;  
 }
 
 .author {
-	color: #656D78;
+    color: #656D78;
 }
 
 .url {
-	color: #3BAFDA;
+    color: #3BAFDA;
 }
 
 .next {
-	font-size: 16px;
-  text-decoration: underline;
+    font-size: 16px;
+    text-decoration: underline;
 }
 
 .content {
-  background: #fff;
-  border-radius: 4px;
-  padding: 10px;
-  border: 1px solid #eee;  
+    background: #fff;
+    border-radius: 4px;
+    padding: 10px;
+    border: 1px solid #eee;  
 }
 
 .readme h1,
@@ -71,68 +71,66 @@ html, body {
 .readme h4,
 .readme h5,
 .readme h6 {
-  font-size: 0.9em !important;
+    font-size: 0.9em !important;
 }
 
 /* hack */
 .twitter-typeahead {
-	display: block !important;
-}
-
-.twitter-typeahead input {
-	padding-left: 44px !important;
+    display: block !important;
 }
 
 .tt-dropdown-menu {
-	margin-left: 44px !important;
-	min-width: 300px !important;
+    margin-left: 10px !important;
+    margin-top: 34px !important;
+    min-width: 300px !important;
+    border-radius:none !important;
 }
 
 .tt-suggestion > p {
-	height: 30px;
-	line-height: 30px;
-  cursor: pointer;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
 }
 
 /*
-	typeahead.js-bootstrap-css
-	https://github.com/bassjobsen/typeahead.js-bootstrap-css
+typeahead.js-bootstrap-css
+https://github.com/bassjobsen/typeahead.js-bootstrap-css
 */
 
 .tt-dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  display: none;
-  float: left;
-  min-width: 160px;
-  padding: 5px 0;
-  margin: 2px 0 0;
-  list-style: none;
-  font-size: 14px;
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 4px;
-  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-  background-clip: padding-box;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    list-style: none;
+    font-size: 14px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
 }
 .tt-suggestion > p {
-  display: block;
-  padding: 3px 20px;
-  clear: both;
-  font-weight: normal;
-  line-height: 1.428571429;
-  color: #333333;
-  white-space: nowrap;
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.428571429;
+    color: #333333;
+    white-space: nowrap;
 }
 .tt-suggestion > p:hover,
 .tt-suggestion > p:focus,
 .tt-suggestion.tt-cursor p {
-  color: #ffffff;
-  text-decoration: none;
-  outline: 0;
-  background-color: #428bca;
+    color: #ffffff;
+    text-decoration: none;
+    outline: 0;
+    background-color: #428bca;
 }
