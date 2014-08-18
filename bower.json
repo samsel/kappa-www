@@ -6,7 +6,7 @@
     "Sam Selvanathan <santhonyselvanat@paypal.com>"
   ],
   "description": "web interface for kappa",
-  "main": "app/index.html",
+  "main": "public/index.html",
   "license": "MIT",
   "private": true,
   "ignore": [

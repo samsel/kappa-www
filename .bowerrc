@@ -4,6 +4,6 @@
   		"https://bower.herokuapp.com"
   	]
   },
-  "directory": "app/components",
+  "directory": "public/components",
   "json": "bower.json"
 }
