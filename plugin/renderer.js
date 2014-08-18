@@ -1,6 +1,7 @@
 'use strict';
 
-var registry = require('./registry'),
+var  markdown = require('markdown').markdown,
+	registry = require('./registry'),
 	templater = require('./templater'),
 	config = require('./config'),
     utils = require('./utils'),
@@ -19,10 +20,11 @@ renderListPage = function (page, req, reply) {
 };
 
 renderPackagePage = function (req, reply) {
-	registry.packageInfo(req.url.pathname.slice(1, req.url.pathname.length), function (info) {
+	registry.packageInfo(req.url.pathname.slice(1, req.url.pathname.length), function (_package) {
+		_package.readme = markdown.toHTML(_package.readme);
 		reply.view('package', {
 			title: options.title,
-			packageInfo: info
+			'package': _package
 		});	
 	});	
 };    

@@ -9,16 +9,39 @@
 </head>
 <body>
 	{{> partials/header }}	
-	<div id="packagePage" class="container">
+	<div class="container">
 		<div class="row">
-			<div class="col-md-8 col-lg-8">
-				<div id="info"></div>
+			<div class="col-md-2 col-lg-2"></div>
+			<div class="col-md-8 col-lg-8 content">
+				<h2>{{package.name}}</h2>
+				<span>{{package.description}}</span>
+				<hr>
+				<div>
+					<h5>Version</h5>
+					<span>{{package.dist-tags.latest}}</span>
+				</div>
+				<hr>
+				<div>
+					<h5>Maintainers</h5>
+					<span>
+						<ul>
+							{{#each package.maintainers}}
+								<li>{{this.name}} ({{this.email}})</li>
+							{{/each}}
+						</ul>
+					</span>
+				</div>
+				<hr>
+				<h5>ReadMe</h5>	
+				<div class="readme">
+					{{{package.readme}}}
+				</div>			
 			</div>
 		</div>
 	</div>
 	<div class="footer"></div>
 	<script>
-		window.packageInfo = {{{json packageInfo}}};
+		window.package = {{{json package}}}
 	</script>
     <script data-main="/public/javascripts/config" src="/public/components/requirejs/require.js"></script>
 </body>

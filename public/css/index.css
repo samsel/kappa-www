@@ -39,7 +39,7 @@ html, body {
 
 .footer {
 	margin-top: 10px;
-	height: 20px;
+	height: 12px;
 	padding: 0;
 }
 
@@ -56,32 +56,20 @@ html, body {
   text-decoration: underline;
 }
 
-.package-list {
+.content {
   background: #fff;
   border-radius: 4px;
-  padding: 20px;
+  padding: 10px;
   border: 1px solid #eee;  
 }
 
-#packagePage {
-  min-height: 100%;
-}
-
-#info {
-  display: none;
-}
-
-/* override json.human.css */
-.jh-type-string {
-	color: #4A89DC;
-}
-
-.jh-type-object > tr:nth-child(odd), .jh-type-array > tr:nth-child(odd){
-    background-color: #FFF;
-}
-
-.jh-type-object > tr:nth-child(even), .jh-type-array > tr:nth-child(even){
-    background-color: #FFF;
+.readme h1,
+.readme h2,
+.readme h3,
+.readme h4,
+.readme h5,
+.readme h6 {
+  font-size: 0.9em !important;
 }
 
 /* hack */
