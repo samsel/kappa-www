@@ -3,6 +3,7 @@
 var _ = require('underscore'),
 	npm = require('npm'),
 	Registry = require('npm-registry-client'),
+	gitURLParser = require('github-url-from-git'),
 	npmconf = require('npmconf'),
 	path = require('path'),
 	config = require('./config'),
@@ -41,6 +42,7 @@ function sync(cb) {
 
 module.exports.setup = function (_options, callback) {
 	options = _options;
+	options.gitDomain = options.gitDomain || 'github.com';
 
 	npmconf.load({}, function (err, conf) {
 		if (err) {
@@ -65,10 +67,15 @@ module.exports.list = function (page, callback) {
 	var start = page * config.page.maxResults,
 		end = start + config.page.maxResults;
 
-	sync(function (packages) {
-		var keys = Object.keys(packages);
+	sync(function (allPackages) {
+		var keys = Object.keys(allPackages);
 		keys = keys.splice(1, keys.length); //ignore the first key which is '_updated'
-		callback(_.values(_.pick(packages, keys.slice(start, end))));
+
+		var packages = _.values(_.pick(allPackages, keys.slice(start, end)));
+		packages.map(function (_package) {
+			_package.repository.webURL = gitURLParser(_package.repository.url, {extraBaseUrls: [options.gitDomain]});
+		});
+		callback(packages);
 	});
 };
 
