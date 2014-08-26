@@ -3,7 +3,7 @@ kappa-www
 
 [![Build Status](https://travis-ci.org/samsel/kappa-www.svg)](https://travis-ci.org/samsel/kappa-www)
 
-kappa-www is a web interface for the private npm registry reverse proxy - kappa[https://github.com/krakenjs/kappa].
+kappa-www is a simple web interface for the private npm registry reverse proxy - kappa[https://github.com/krakenjs/kappa].
 It is written as a Hapi Plugin to play nice with the kappa library to serve HTML responses to web based requests(from browsers).
 Refer to the Usage section below to understand how kappa-www can be configured and used with kappa.
 
@@ -53,7 +53,8 @@ $ npm2es --couch="http://ip_address:port/registry/" --es="http://localhost:9200/
             "elasticsearch": {
                 "url": "http://localhost:9200/",
                 "index": "npm"
-            }            
+            },
+            "gitDomain": "github.yourdomain.com" (defaults to github.com)    
         },
         "kappa": {
             "vhost": "localhost",
