@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "node_modules/.bin/bower install --allow-root",
     "test": "tape test/*.js",
-    "lint": "jshint -c .jshintrc plugin/*.js app/javascripts/*.js"
+    "lint": "jshint -c .jshintrc plugin/*.js public/javascripts/*.js"
   },
   "keywords": [
     "npm",
