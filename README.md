@@ -9,16 +9,7 @@ Refer to the Usage section below to understand how kappa-www can be configured a
 
 ## prerequisites
 ----------------
-* Make sure that the following things are installed in your system
-* Java
-* Elasticsearch (installed and running on port 9200)
-* bower, node module (installed globally)
-* npm2es, node module (installed globally)
-* before you configure and start kappa-www, index your private registry into elasticsearch by running the below command
-
-```shell
-$ npm2es --couch="http://ip_address:port/registry/" --es="http://localhost:9200/npm"
-```
+* Make sure that the bower is installed globally in your system
 
 ## usage
 --------
@@ -50,10 +41,6 @@ $ npm2es --couch="http://ip_address:port/registry/" --es="http://localhost:9200/
             "vhost": "localhost",
             "title": "My Orgs Private NPM Browser"
             "registry": "http://npm.myorg.com/",
-            "elasticsearch": {
-                "url": "http://localhost:9200/",
-                "index": "npm"
-            },
             "gitDomain": "github.yourdomain.com" (defaults to github.com)    
         },
         "kappa": {
@@ -78,8 +65,6 @@ $ open http://localhost:8000/
 * remove the stupid ```if err``` in the code and write it nice n clean
 * asset packaging
 * user management
-* tune elastic search
-* redis cache
 
 ## Misc
 --------
