@@ -3,7 +3,7 @@
 var  markdown = require('markdown').markdown,
 	registry = require('./registry'),
 	templater = require('./templater'),
-	config = require('./config'),
+	config = require('../config'),
     utils = require('./utils'),
     search, options,
     renderListPage, renderPackagePage;
