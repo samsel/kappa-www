@@ -2,7 +2,7 @@
 	"directory": {
 		"asset": "public",
 		"template": "templates",
-		"cache": "cache"
+		"cache": ".cache"
 
 	},
 	"layoutFile": "layout",

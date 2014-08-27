@@ -6,7 +6,7 @@ var _ = require('underscore'),
 	gitURLParser = require('github-url-from-git'),
 	npmconf = require('npmconf'),
 	path = require('path'),
-	config = require('./config'),
+	config = require('../config'),
 	options,
 	client,
 	connectionConfig = {

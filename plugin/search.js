@@ -1,7 +1,7 @@
 'use strict';
 
 var elasticsearch = require('elasticsearch'),
-    config = require('./config');
+    config = require('../config');
 
 
 module.exports = function (options) {
