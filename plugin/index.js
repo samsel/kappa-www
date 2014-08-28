@@ -1,9 +1,9 @@
 'use strict';
 
-var pkg       = require('../package');
-var utils     = require('./utils');
-var renderer  = require('./renderer');
-var templater = require('./templater');
+var pkg          = require('../package');
+var utils        = require('./utils');
+var interceptor  = require('./interceptor');
+var templater    = require('./templater');
 
 module.exports = {
 
@@ -40,12 +40,12 @@ module.exports = {
 
         plugin.ext('onRequest', function (req, reply) {
             if (utils.isSearchRequest(req)) {
-                renderer.search(req, reply);
+                interceptor.search(req, reply);
                 return;
             }
 
             if (utils.shouldRenderHtml(req)) {
-                renderer.render(req, reply);
+                interceptor.render(req, reply);
                 return;
             }
 
@@ -54,13 +54,13 @@ module.exports = {
 
         plugin.ext('onPreResponse', function (req, reply) {
             if (req.response && req.response.isBoom && utils.shouldRenderHtml(req)) {            
-                renderer.renderError(req, reply);
+                interceptor.interceptorror(req, reply);
                 return;
             }
 
             reply();
         });
 
-        renderer.setup(options, next);                    
+        interceptor.setup(options, next);                    
     }
 };
