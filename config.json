@@ -14,5 +14,11 @@
 	"search": {
 		"url": "/-/search/",
 		"maxResults": 15
-	}
+	},
+	"registry": {
+		"timeout": 1000,
+		"staleOk": false,
+		"dumpURL": "-/all"
+	},
+	"defaultDomain": "github.com"
 }

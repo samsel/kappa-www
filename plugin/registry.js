@@ -1,93 +1,73 @@
 'use strict';
 
-var _ = require('underscore'),
-	npm = require('npm'),
-	Registry = require('npm-registry-client'),
-	gitURLParser = require('github-url-from-git'),
-	npmconf = require('npmconf'),
-	path = require('path'),
-	config = require('../config'),
-	options,
-	client,
-	connectionConfig = {
-		timeout: 1000,
-		staleOk: false
-	};
+var _         = require('underscore');
+var npm       = require('npm');
+var Client    = require('npm-registry-client');
+var urlParser = require('github-url-from-git');
+var npmconf   = require('npmconf');
+var path      = require('path');
+var config    = require('../config');
 
 
-function initLocalNPM() {
-	npm.load({
-		loaded: false,
-		registry: options.registry
-	}, 
-	function (err) {
-		if (err) {
-			throw err;
-		}
+var Registry = module.exports = function (options) {
+	this._client = null;
+	this._options = options;
+	this._domain = options.gitDomain || 
+					config.defaultDomain;
+	this._syncURL = this._options.registry + 
+					config.registry.dumpURL;
+	this._cachePath = path.resolve(__dirname + 
+							'/../' + 
+							config.directory.cache);
+};
 
-		npm.on("log", function (message) {
-			console.log(message);
-		});
-	});
-}
+Registry.prototype._sync = function (callback) {
+	this._client.get(this._syncURL, 
+					config.registry, 
+					function (err, data, raw, res) {
+						if (err) { throw err; }
+						if (typeof callback === 'function') { callback(data); }
+	}); 
+};
 
-function sync(cb) {
-	var uri = options.registry + "-/all",
-		callback = function (err, data, raw, res) {
-			if (err) { throw err; }
-			if (typeof cb === 'function') { cb(data); }
-		};
-	client.get(uri, connectionConfig, callback); 
-}
-
-module.exports.setup = function (_options, callback) {
-	options = _options;
-	options.gitDomain = options.gitDomain || 'github.com';
-
+Registry.prototype.init = function (callback) {
+	var self = this;
 	npmconf.load({}, function (err, conf) {
-		if (err) {
-			throw err;
-		}
-		conf.set('cache', path.resolve(__dirname + '/../' + config.directory.cache));
+		if (err) { throw err; }
+		conf.set('cache', self._cachePath);
 		conf.set('always-auth', false);
 		conf.set('strict-ssl', false);
 
-		client = new Registry(conf);
-		//setInterval(sync, config.syncInterval);
-		sync(function (packages) {
+		self._client = new Client(conf);
+		self._sync(function (packages) {
 			callback();
 		});
-
-		initLocalNPM();
 	});
 };
 
-
-module.exports.list = function (page, callback) {
+Registry.prototype.packages = function (page, callback) {
 	var start = page * config.page.maxResults,
-		end = start + config.page.maxResults;
+		end = start + config.page.maxResults,
+		self = this;
 
-	sync(function (allPackages) {
+	this._sync(function (allPackages) {
 		var keys = Object.keys(allPackages);
-		keys = keys.splice(1, keys.length); //ignore the first key which is '_updated'
+		//ignore the first key which is '_updated'
+		keys = keys.splice(1, keys.length); 
 
 		var packages = _.values(_.pick(allPackages, keys.slice(start, end)));
 		packages.map(function (_package) {
-			_package.repository.webURL = gitURLParser(_package.repository.url, {extraBaseUrls: [options.gitDomain]});
+			//_package.repository.webURL = urlParser(_package.repository.url, {extraBaseUrls: [self._domain]});
 		});
 		callback(packages);
 	});
 };
 
-module.exports.packageInfo = function (name, callback) {
-	var uri = options.registry + name;
-
-	client.get(uri, connectionConfig, function (err, data, raw, res) {
-		if (err) {
-			throw err;
-		}
-
-		callback(data);
-
+Registry.prototype.packageInfo = function (name, callback) {
+	this._client.get(this._options.registry + name, 
+		config.registry, 
+		function (err, data, raw, res) {
+			if (err) { throw err; }
+			callback(data);
 	});
 };

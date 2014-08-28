@@ -31,6 +31,6 @@ Thumbs.db
 
 public/components/
 
-cache/
+.cache
 
 private.todo

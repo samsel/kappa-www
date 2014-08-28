@@ -1,15 +1,15 @@
 'use strict';
 
-var  markdown = require('markdown').markdown,
-	registry = require('./registry'),
+var markdown = require('markdown').markdown,
+	Registry = require('./registry'),
 	templater = require('./templater'),
 	config = require('../config'),
     utils = require('./utils'),
-    search, options,
+    search, options, registry,
     renderListPage, renderPackagePage;
 
 renderListPage = function (page, req, reply) {
-	registry.list(page, function (packages) {
+	registry.packages(page, function (packages) {
 		reply.view('index', {
 			title: options.title,
 			searchUrl: config.search.url,
@@ -34,7 +34,8 @@ module.exports.engine = templater.engine;
 module.exports.setup = function (_options, callback) {
 	options = _options;
 	search = require('./search')(_options);
-	registry.setup(_options, callback);
+	registry = new Registry(_options);
+	registry.init(callback);
 };
 
 module.exports.renderError = function (req, reply) {		
