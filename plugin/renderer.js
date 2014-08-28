@@ -1,12 +1,15 @@
 'use strict';
 
-var markdown = require('markdown').markdown,
-	Registry = require('./registry'),
-	templater = require('./templater'),
-	config = require('../config'),
-    utils = require('./utils'),
-    search, options, registry,
-    renderListPage, renderPackagePage;
+var utils    = require('./utils');
+var config   = require('../config');
+var Registry = require('./registry');
+var markdown = require('markdown').markdown;
+
+var search;
+var options;
+var registry;
+var renderListPage; 
+var renderPackagePage;
 
 renderListPage = function (page, req, reply) {
 	registry.packages(page, function (packages) {
@@ -27,9 +30,7 @@ renderPackagePage = function (req, reply) {
 			'package': _package
 		});	
 	});	
-};    
-
-module.exports.engine = templater.engine;
+};
 
 module.exports.setup = function (_options, callback) {
 	options = _options;

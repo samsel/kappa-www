@@ -23,10 +23,10 @@ var Registry = module.exports = function (options) {
 
 Registry.prototype._sync = function (callback) {
 	this._client.get(this._syncURL, 
-					config.registry, 
-					function (err, data, raw, res) {
-						if (err) { throw err; }
-						if (typeof callback === 'function') { callback(data); }
+				config.registry, 
+				function (err, data, raw, res) {
+					if (err) { throw err; }
+					if (typeof callback === 'function') { callback(data); }
 	}); 
 };
 

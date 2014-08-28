@@ -1,8 +1,9 @@
 'use strict';
 
-var pkg = require('../package'),
-    renderer = require('./renderer'),
-    utils = require('./utils'); 
+var pkg       = require('../package');
+var utils     = require('./utils');
+var renderer  = require('./renderer');
+var templater = require('./templater');
 
 module.exports = {
 
@@ -15,7 +16,7 @@ module.exports = {
         plugin.views({
             engines: {
                 html: {
-                    module: renderer.engine
+                    module: templater
                     //layout: utils.layoutFile
                 }
             },
@@ -61,6 +62,5 @@ module.exports = {
         });
 
         renderer.setup(options, next);                    
-
     }
 };
