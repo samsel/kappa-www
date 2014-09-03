@@ -5,7 +5,6 @@ var config   = require('../config');
 var Registry = require('./registry');
 var markdown = require('markdown').markdown;
 
-var search;
 var options;
 var registry;
 var renderListPage; 
@@ -16,6 +15,7 @@ renderListPage = function (page, req, reply) {
 		reply.view('index', {
 			title: options.title,
 			searchUrl: config.search.url,
+			enableSearch: config.search.enable,
 			packages: packages,
 			nextPage: page + 1
 		});	
@@ -34,7 +34,6 @@ renderPackagePage = function (req, reply) {
 
 module.exports.setup = function (_options, callback) {
 	options = _options;
-	search = require('./search')(_options);
 	registry = new Registry(_options);
 	registry.init(callback);
 };
@@ -69,9 +68,9 @@ module.exports.render = function (req, reply) {
 };
 
 module.exports.search = function (req, reply) {
-	search(utils.searchKeyFromRequest(req), function (err, results) {
-		reply({
-			packages: results
-		});
-	});
+	// search(utils.searchKeyFromRequest(req), function (err, results) {
+	// 	reply({
+	// 		packages: results
+	// 	});
+	// });
 };

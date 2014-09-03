@@ -8,7 +8,9 @@
 <body>
 	{{> partials/header }}	
 	<div class="container">
-		{{> partials/search }}	
+		{{#if enableSearch}}
+			{{> partials/search }}
+		{{/if}}
 		<div class="row">
 			<div class="col-md-2 col-lg-2"></div>
 			<div class="col-md-8 col-lg-8 content">

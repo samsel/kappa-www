@@ -13,7 +13,8 @@
 	},	
 	"search": {
 		"url": "/-/search/",
-		"maxResults": 15
+		"maxResults": 15,
+		"enable": false
 	},
 	"registry": {
 		"timeout": 1000,
