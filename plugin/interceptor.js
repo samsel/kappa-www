@@ -8,7 +8,7 @@ var markdown = require('markdown').markdown;
 var options;
 var registry;
 
-function renderListPage (page, req, reply) {
+function renderListPage(page, req, reply) {
 	registry.packages(page, function (packages) {
 		reply.view('index', {
 			title: options.title,
@@ -18,9 +18,9 @@ function renderListPage (page, req, reply) {
 			nextPage: page + 1
 		});	
 	});	
-};
+}
 
-function renderPackagePage (req, reply) {
+function renderPackagePage(req, reply) {
 	registry.packageInfo(req.url.pathname.slice(1, req.url.pathname.length), function (_package) {
 		_package.readme = markdown.toHTML(_package.readme);
 		reply.view('package', {
@@ -28,16 +28,16 @@ function renderPackagePage (req, reply) {
 			'package': _package
 		});	
 	});	
-};
+}
 
-function renderError (req, reply) {		
+function renderError(req, reply) {		
 	reply.view('error', {
 		title: options.title,
 		error: 'fatal error'
 	});
-};
+}
 
-function render (req, reply) {
+function render(req, reply) {
 	var path = req.url.pathname; 
 
 	if (path === '/') {
@@ -57,7 +57,7 @@ function render (req, reply) {
 	else {
 		renderPackagePage(req, reply);
 	}
-};
+}
 
 module.exports.setup = function (_options, callback) {
 	options = _options;
