@@ -54,7 +54,7 @@ module.exports = {
 
         plugin.ext('onPreResponse', function (req, reply) {
             if (req.response && req.response.isBoom && utils.shouldRenderHtml(req)) {            
-                interceptor.interceptorror(req, reply);
+                interceptor.renderError(req, reply);
                 return;
             }
 
