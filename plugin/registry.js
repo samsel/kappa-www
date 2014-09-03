@@ -27,7 +27,8 @@ Registry.prototype._sync = function (callback) {
 				function (err, data, raw, res) {
 					if (err) { throw err; }
 					if (typeof callback === 'function') { callback(data); }
-	}); 
+				}
+	); 
 };
 
 Registry.prototype.init = function (callback) {
@@ -69,5 +70,6 @@ Registry.prototype.packageInfo = function (name, callback) {
 		function (err, data, raw, res) {
 			if (err) { throw err; }
 			callback(data);
-	});
+		}
+	);
 };

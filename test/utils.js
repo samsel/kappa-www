@@ -2,7 +2,7 @@
 
 var test = require('tape');
 var Utils = require('../plugin/utils');
-var config = require('../plugin/config');
+var config = require('../config');
 var Hapi = require('hapi');
 
 

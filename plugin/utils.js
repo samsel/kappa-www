@@ -2,40 +2,42 @@ var config = require('../config');
 
 'use strict';
 
-var utils = {
-	isNonNPMClientBasedRequest: function (req) {
-		return req.headers['user-agent'] &&
-				req.headers['user-agent'].indexOf('npm/') === -1;
-	},
+module.exports = (function () {
 
-	isXHRRequest: function (req) {
-		return (req.headers['x-requested-with'] === 'XMLHttpRequest');
-	},
+	var utils = {
+		isNonNPMClientBasedRequest: function (req) {
+			return req.headers['user-agent'] &&
+					req.headers['user-agent'].indexOf('npm/') === -1;
+		},
 
-	isAssetRequest: function (req) {
-		return req.path.indexOf(config.directory.asset + '/') !== -1;
-	},
+		isXHRRequest: function (req) {
+			return (req.headers['x-requested-with'] === 'XMLHttpRequest');
+		},
 
-	isPlainResponse: function (req) {
-		return (req.response.variety && req.response.variety === 'plain');
-	}
-};
+		isAssetRequest: function (req) {
+			return req.path.indexOf(config.directory.asset + '/') !== -1;
+		},
 
-module.exports.shouldRenderHtml = function (req) {
-	return utils.isNonNPMClientBasedRequest(req) && 
-			!utils.isAssetRequest(req);
-};
+		isPlainResponse: function (req) {
+			return (req.response.variety && req.response.variety === 'plain');
+		}
+	};	
 
-module.exports.isSearchRequest = function (req) {
-	return utils.isXHRRequest(req) && 
-			req.url.pathname.indexOf(config.search.url) !== -1;
-};
-
-module.exports.searchKeyFromRequest = function (req) {
-	return req.url.pathname.split('/').pop();
-};
-
-module.exports.assestRoute = '/'  + config.directory.asset + '/{path*}';
-module.exports.assestPath  = './' + config.directory.asset;
-module.exports.layoutFile  = config.layoutFile;
-module.exports.viewPath    = './' + config.directory.asset + '/' + config.directory.template;
+	return {
+		shouldRenderHtml: function (req) {
+			return utils.isNonNPMClientBasedRequest(req) && 
+				!utils.isAssetRequest(req);
+		},
+		isSearchRequest: function (req) {
+			return utils.isXHRRequest(req) && 
+					req.url.pathname.indexOf(config.search.url) !== -1;
+		},
+		searchKeyFromRequest: function (req) {
+			return req.url.pathname.split('/').pop();
+		},
+		assestRoute: '/'  + config.directory.asset + '/{path*}',
+		assestPath: './' + config.directory.asset,
+		layoutFile: config.layoutFile,			
+		viewPath: './' + config.directory.asset + '/' + config.directory.template
+	};
+})();
