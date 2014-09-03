@@ -7,10 +7,8 @@ var markdown = require('markdown').markdown;
 
 var options;
 var registry;
-var renderListPage; 
-var renderPackagePage;
 
-renderListPage = function (page, req, reply) {
+function renderListPage (page, req, reply) {
 	registry.packages(page, function (packages) {
 		reply.view('index', {
 			title: options.title,
@@ -22,7 +20,7 @@ renderListPage = function (page, req, reply) {
 	});	
 };
 
-renderPackagePage = function (req, reply) {
+function renderPackagePage (req, reply) {
 	registry.packageInfo(req.url.pathname.slice(1, req.url.pathname.length), function (_package) {
 		_package.readme = markdown.toHTML(_package.readme);
 		reply.view('package', {
@@ -32,20 +30,14 @@ renderPackagePage = function (req, reply) {
 	});	
 };
 
-module.exports.setup = function (_options, callback) {
-	options = _options;
-	registry = new Registry(_options);
-	registry.init(callback);
-};
-
-module.exports.renderError = function (req, reply) {		
+function renderError (req, reply) {		
 	reply.view('error', {
 		title: options.title,
 		error: 'fatal error'
 	});
 };
 
-module.exports.render = function (req, reply) {
+function render (req, reply) {
 	var path = req.url.pathname; 
 
 	if (path === '/') {
@@ -67,10 +59,31 @@ module.exports.render = function (req, reply) {
 	}
 };
 
-module.exports.search = function (req, reply) {
-	// search(utils.searchKeyFromRequest(req), function (err, results) {
-	// 	reply({
-	// 		packages: results
-	// 	});
-	// });
+module.exports.setup = function (_options, callback) {
+	options = _options;
+	registry = new Registry(_options);
+	registry.init(callback);
+};
+
+module.exports.preIntercept = function (req, reply) {
+    if (utils.isSearchRequest(req)) {
+        //search(req, reply);
+        //return;
+    }
+
+    if (utils.shouldRenderHtml(req)) {
+        render(req, reply);
+        return;
+    }	
+
+	reply();
+};
+
+module.exports.postIntercept = function (req, reply) {
+	if (req.response && req.response.isBoom && utils.shouldRenderHtml(req)) {            
+	    renderError(req, reply);
+	    return;
+	}
+
+	reply();
 };

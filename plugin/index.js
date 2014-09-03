@@ -38,28 +38,8 @@ module.exports = {
             }
         });          
 
-        plugin.ext('onRequest', function (req, reply) {
-            if (utils.isSearchRequest(req)) {
-                interceptor.search(req, reply);
-                return;
-            }
-
-            if (utils.shouldRenderHtml(req)) {
-                interceptor.render(req, reply);
-                return;
-            }
-
-            reply();
-        });
-
-        plugin.ext('onPreResponse', function (req, reply) {
-            if (req.response && req.response.isBoom && utils.shouldRenderHtml(req)) {            
-                interceptor.renderError(req, reply);
-                return;
-            }
-
-            reply();
-        });
+        plugin.ext('onRequest', interceptor.preIntercept);
+        plugin.ext('onPreResponse', interceptor.postIntercept);
 
         interceptor.setup(options, next);                    
     }
