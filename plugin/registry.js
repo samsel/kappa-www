@@ -58,7 +58,9 @@ Registry.prototype.packages = function (page, callback) {
 
 		var packages = _.values(_.pick(allPackages, keys.slice(start, end)));
 		packages.map(function (_package) {
-			//_package.repository.webURL = urlParser(_package.repository.url, {extraBaseUrls: [self._domain]});
+			if (_package.repository && _package.repository.url) {
+				_package.repository.webURL = urlParser(_package.repository.url, {extraBaseUrls: [self._domain]});
+			}
 		});
 		callback(packages);
 	});
