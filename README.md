@@ -9,8 +9,13 @@ It is written as a Hapi Plugin to play nice with the kappa library to serve HTML
 kappa-www is a easy to setup!
 Refer to the Usage section below to understand how kappa-www can be configured and used with kappa.
 
-## prerequisites
+## features
 ----------------
+* browse packages
+* simple search
+
+## pre-requisites
+-----------------
 * Bower - Make sure that the bower is installed globally.
 
 ## usage

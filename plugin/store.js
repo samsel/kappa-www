@@ -1,10 +1,17 @@
 var Datastore = require('nedb');
 var config = require('../config');
-var db = new Datastore({ 
-	filename: __dirname + '/../' + config.nedb.name, 
-	autoload: true 
-});
 var maxSearchResults = config.search.maxResults;
+var maxPageResults = config.page.maxResults;
+var projections = {
+    name: 1
+};
+var sortKeys = {
+    name: 1
+};
+var db = new Datastore({
+    filename: __dirname + '/../' + config.nedb.name,
+    autoload: true
+});
 
 module.exports = {
 	save: function (packages) {
@@ -21,7 +28,8 @@ module.exports = {
 	search: function (key, callback) {
 		var regex = new RegExp(key, "i");
 		var query = { 
-			$or: [{ 
+			$or: [
+                {
 					'name': regex 
 				}, { 
 					'maintainers.name': regex 
@@ -29,16 +37,29 @@ module.exports = {
 					'author.name': regex 
 				}, { 
 					'author.email': regex 
-				}]
+				}
+            ]
 		};
-		var projections = {
-			name: 1
-		};
-		db.find(query, projections).limit(maxSearchResults).exec(function (err, packages) {
+		db.find(query, projections)
+        .limit(maxSearchResults)
+        .exec(function (err, packages) {
 			if (err) {
 				return callback(err);
 			}
 			callback(null, packages);
 		});
-	}
+	},
+
+    getPackages: function (page, callback) {
+        db.find({})
+        .sort(sortKeys)
+        .skip(page * maxPageResults)
+        .limit(maxPageResults)
+        .exec(function (err, packages) {
+            if (err) {
+                return callback(err);
+            }
+            callback(null, packages);
+        });
+    }
 };

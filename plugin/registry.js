@@ -39,7 +39,13 @@ Registry.prototype._sync = function (callback) {
                     // that get thrown because
                     // of uniqueKey constraints.
                     // do updates instead of save.
-					store.save(packages);
+
+                    // TODO: dont sync for every call
+                    // Load from DB and have a sync Interval
+                    // to regularly sync the packages
+
+                    //store.save(packages);
+
 					if (typeof callback === 'function') { callback(packages); }
 				}
 	); 
@@ -61,22 +67,13 @@ Registry.prototype.init = function (callback) {
 };
 
 Registry.prototype.packages = function (page, callback) {
-	var start = page * config.page.maxResults,
-		end = start + config.page.maxResults,
-		self = this;
+    store.getPackages(page, function (err, packages) {
+        if (err) {
+            throw err;
+        }
 
-    // TODO: dont sync for every call
-    // Load from DB and have a sync Interval
-    // to regularly sync the packages
-	this._sync(function (allPackages) {
-		var packages = allPackages.slice(start, end);
-		packages.map(function (_package) {
-			if (_package.repository && _package.repository.url) {
-				_package.repository.webURL = urlParser(_package.repository.url, {extraBaseUrls: [self._domain]});
-			}
-		});
-		callback(packages);
-	});
+        callback(packages);
+    });
 };
 
 Registry.prototype.packageInfo = function (name, callback) {
