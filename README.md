@@ -11,7 +11,7 @@ Refer to the Usage section below to understand how kappa-www can be configured a
 
 ## prerequisites
 ----------------
-* Make sure that the bower is installed globally in your system
+* Bower - Make sure that the bower is installed globally.
 
 ## usage
 --------

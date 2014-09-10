@@ -7,6 +7,7 @@ var urlParser = require('github-url-from-git');
 var npmconf   = require('npmconf');
 var path      = require('path');
 var config    = require('../config');
+var store     = require('./store');
 
 
 var Registry = module.exports = function (options) {
@@ -26,7 +27,20 @@ Registry.prototype._sync = function (callback) {
 				config.registry, 
 				function (err, data, raw, res) {
 					if (err) { throw err; }
-					if (typeof callback === 'function') { callback(data); }
+
+                    // remove _id and _tag
+                    // from the response data
+                    delete data._id;
+                    delete data._etag;
+
+					var keys = Object.keys(data);
+					var packages = _.values(_.pick(data, keys));
+                    // TODO: deal with errors
+                    // that get thrown because
+                    // of uniqueKey constraints.
+                    // do updates instead of save.
+					store.save(packages);
+					if (typeof callback === 'function') { callback(packages); }
 				}
 	); 
 };
@@ -51,12 +65,11 @@ Registry.prototype.packages = function (page, callback) {
 		end = start + config.page.maxResults,
 		self = this;
 
+    // TODO: dont sync for every call
+    // Load from DB and have a sync Interval
+    // to regularly sync the packages
 	this._sync(function (allPackages) {
-		var keys = Object.keys(allPackages);
-		//ignore the first key which is '_updated'
-		keys = keys.splice(1, keys.length); 
-
-		var packages = _.values(_.pick(allPackages, keys.slice(start, end)));
+		var packages = allPackages.slice(start, end);
 		packages.map(function (_package) {
 			if (_package.repository && _package.repository.url) {
 				_package.repository.webURL = urlParser(_package.repository.url, {extraBaseUrls: [self._domain]});

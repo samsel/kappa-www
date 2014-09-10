@@ -8,19 +8,11 @@ var maxSearchResults = config.search.maxResults;
 
 module.exports = {
 	save: function (packages) {
-		
-		var pp = [];
-
-		for (var i = 0; i < packages.length - 21 ; i++) {
-			var p = packages[i];
-			console.dir(p);
-			pp.push(p);
-		}
-
-		db.insert(pp, function (err, insertedPackages) {
+		db.insert(packages, function (err, insertedPackages) {
 			if (err) {
 				// throw error and let the dev know
 				// that something is terribly wrong!
+                console.dir(err);
 				throw err;
 			}
 		});		
