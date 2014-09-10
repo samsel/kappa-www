@@ -14,12 +14,15 @@
 	"search": {
 		"url": "/-/search/",
 		"maxResults": 15,
-		"enable": false
+		"enable": true
 	},
 	"registry": {
 		"timeout": 1000,
 		"staleOk": false,
 		"dumpURL": "-/all"
 	},
-	"defaultDomain": "github.com"
+	"defaultDomain": "github.com",
+	"nedb": {
+		"name": "local.npm.db"
+	}
 }

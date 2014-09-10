@@ -13,8 +13,8 @@ module.exports = {
 	},
 	preIntercept: function (req, reply) {
 	    if (utils.isSearchRequest(req)) {
-	        //search(req, reply);
-	        //return;
+	        renderer.renderSearch(req, reply);
+	        return;
 	    }
 
 	    if (utils.shouldRenderHtml(req)) {

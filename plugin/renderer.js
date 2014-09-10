@@ -1,4 +1,6 @@
 var config   = require('../config');
+var store    = require('./store');
+var utils    = require('./utils');
 var markdown = require('markdown').markdown;
 
 'use strict';
@@ -56,8 +58,23 @@ module.exports = function (options, registry) {
 		}
 	}
 
+	function renderSearch(req, reply) {
+		store.search(utils.searchKeyFromRequest(req), function (err, packages) {
+			if (err) {
+				return reply({
+					error: {
+						message: err.message
+					}
+				});
+			}
+
+			reply(packages);
+		});
+	}	
+
 	return {
 		render: render,
-		renderError: renderError
+		renderError: renderError,
+		renderSearch: renderSearch
 	};
 };

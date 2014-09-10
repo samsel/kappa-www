@@ -33,7 +33,7 @@ module.exports = (function () {
 					req.url.pathname.indexOf(config.search.url) !== -1;
 		},
 		searchKeyFromRequest: function (req) {
-			return req.url.pathname.split('/').pop();
+			return decodeURIComponent(req.url.pathname.split('/').pop());
 		},
 		assestRoute: '/'  + config.directory.asset + '/{path*}',
 		assestPath: './' + config.directory.asset,
