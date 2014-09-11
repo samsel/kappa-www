@@ -66,13 +66,13 @@ $ npm start
 $ open http://localhost:8000/
 ````
 
-## Todo
+## todo
 --------
 * handle errors properly
 * remove the stupid ```if err``` in the code and write it nice n clean
 * asset packaging
 * user management
 
-## Misc
+## misc
 --------
 * To Lint: ```npm run lint```

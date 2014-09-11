@@ -24,6 +24,21 @@ module.exports = (function () {
 	};	
 
 	return {
+		packageCleaner: function (packages) {
+			// some packages seem to have _id attribute.
+			// remove those, beacuse it conflicts with 
+			// nedb needing that _id to store packages
+			// into the local db.
+			return packages.map(function (pkg) {
+				if (pkg._id) {
+					console.warn('package named: ' 
+							+ pkg.name 
+							+ ' has _id attribute in its document. removing it.');
+					delete pkg._id;
+				}
+				return pkg;
+			});
+		},
 		shouldRenderHtml: function (req) {
 			return utils.isNonNPMClientBasedRequest(req) && 
 				!utils.isAssetRequest(req);

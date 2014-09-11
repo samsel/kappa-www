@@ -8,7 +8,7 @@ var npmconf   = require('npmconf');
 var path      = require('path');
 var config    = require('../config');
 var store     = require('./store');
-
+var utils      = require('./utils');
 
 var Registry = module.exports = function (options) {
 	this._client = null;
@@ -25,7 +25,7 @@ var Registry = module.exports = function (options) {
 Registry.prototype._sync = function (callback) {
 	this._client.get(this._syncURL, 
 				config.registry, 
-				function (err, data, raw, res) {
+				function (err, data) {
 					if (err) { throw err; }
 
                     // remove _id and _tag
@@ -33,18 +33,8 @@ Registry.prototype._sync = function (callback) {
                     delete data._id;
                     delete data._etag;
 
-					var keys = Object.keys(data);
-					var packages = _.values(_.pick(data, keys));
-                    // TODO: deal with errors
-                    // that get thrown because
-                    // of uniqueKey constraints.
-                    // do updates instead of save.
-
-                    // TODO: dont sync for every call
-                    // Load from DB and have a sync Interval
-                    // to regularly sync the packages
-
-                    //store.save(packages);
+					var packages = _.values(data);
+                    store.update(utils.packageCleaner(packages));
 
 					if (typeof callback === 'function') { callback(packages); }
 				}
@@ -60,6 +50,9 @@ Registry.prototype.init = function (callback) {
 		conf.set('strict-ssl', false);
 
 		self._client = new Client(conf);
+         // TODO: dont sync for every call
+        // Load from DB and have a sync Interval
+        // to regularly sync the packages
 		self._sync(function (packages) {
 			callback();
 		});
@@ -71,7 +64,12 @@ Registry.prototype.packages = function (page, callback) {
         if (err) {
             throw err;
         }
-
+        //TODO: make this a DB operation!
+        //packages.map(function (_package) {
+        //if (_package.repository && _package.repository.url) {
+        //_package.repository.webURL = urlParser(_package.repository.url, {extraBaseUrls: [self._domain]});
+        //}
+        //});
         callback(packages);
     });
 };
