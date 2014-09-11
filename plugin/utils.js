@@ -29,15 +29,25 @@ module.exports = (function () {
 			// remove those, beacuse it conflicts with 
 			// nedb needing that _id to store packages
 			// into the local db.
-			return packages.map(function (pkg) {
+            var filteredPackages = [];
+			packages.forEach(function (pkg) {
 				if (pkg._id) {
-					console.warn('package named: ' 
+					console.log('package named: ' 
 							+ pkg.name 
 							+ ' has _id attribute in its document. removing it.');
 					delete pkg._id;
 				}
-				return pkg;
+
+                // get only objects.
+                // npm response returns
+                // timestamps also in the
+                // response. we ignore that.
+                if (typeof pkg === 'object') {
+                    filteredPackages.push(pkg);
+                }
 			});
+
+            return filteredPackages;
 		},
 		shouldRenderHtml: function (req) {
 			return utils.isNonNPMClientBasedRequest(req) && 

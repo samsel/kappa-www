@@ -50,11 +50,10 @@ Registry.prototype.init = function (callback) {
 		conf.set('strict-ssl', false);
 
 		self._client = new Client(conf);
-         // TODO: dont sync for every call
-        // Load from DB and have a sync Interval
-        // to regularly sync the packages
 		self._sync(function (packages) {
-			callback();
+			// start to regularly sync the packages
+            setInterval(self._sync.bind(self), config.syncInterval);
+            return callback();
 		});
 	});
 };

@@ -6,7 +6,7 @@
 
 	},
 	"layoutFile": "layout",
-	"syncInterval": 3600,
+	"syncInterval": 600000,
 	"page": {
 		"url": "/-/page/",
 		"maxResults": 10
