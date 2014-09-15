@@ -25,15 +25,10 @@ module.exports = {
 
 	update: function (packages) {
 		async.mapSeries(packages, function (pkg, callback) {
-			db.update({
-                    name:pkg.name
-                },
-			pkg, 
-			{
-				multi:false,
-				upsert: true
-			}, 
-			callback);	
+			db.update({name: pkg.name}, 
+				pkg, 
+				{multi: false, upsert: true}, 
+				callback);	
 		}, function (err, results) {
 			if (err) {
 				// throw error and let the dev know

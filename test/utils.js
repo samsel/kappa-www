@@ -10,7 +10,7 @@ var Hapi = require('hapi');
 test('kappa-www Utils', function (t) {
 
     t.test('all methods should be know to test suite', function (t) {
-        t.equal(Object.keys(Utils).length, 7);
+        t.equal(Object.keys(Utils).length, 8);
         t.end();
     });
 
@@ -117,6 +117,22 @@ test('kappa-www Utils', function (t) {
         };
         t.equal(Utils.shouldRenderHtml(req), false);
         t.end();
-    });                                              
+    }); 
+
+    t.test('packageCleaner method should clean the input array and return only array of objects and remove _id for the objects' , function (t) {
+        var input = [{
+            _id: '_id attr',
+            another: 'attr'
+        },
+        'string element',
+        999];
+
+        var output = Utils.packageCleaner(input);
+
+        t.equal(Array.isArray(output), true);
+        t.equal(output.length, 1);
+        t.equal(output[0]._id, undefined);
+        t.end();
+    });                                                  
 
 });
