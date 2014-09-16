@@ -37,7 +37,11 @@ module.exports = function (options, registry) {
 	}
 
 	function render(req, reply) {
-		var path = req.url.pathname; 
+		var path = req.url.pathname;
+		if (path.length > 1 && path.charAt(path.length-1) === '/') {
+			// remove the trailing '/' - if any from the path
+			path = path.substring(0, path.length-1);
+		}
 
 		if (path === '/') {
 			renderListPage(0, req, reply);
@@ -53,8 +57,15 @@ module.exports = function (options, registry) {
 				renderListPage(page, req, reply);
 			}
 		}
-		else {
+		else if (path.split('/').length === 2) {
+			// render the package view for urls like
+			// http://localhost:8000/<you-pkg-name>
 			renderPackagePage(req, reply);
+		}
+		else {
+			// dont know what to do at this point!
+			// just render whatever it is; as is.
+			reply();
 		}
 	}
 
