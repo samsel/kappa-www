@@ -20,7 +20,7 @@ var Registry = module.exports = function (options) {
 							config.directory.cache);
 	this._urlParserConfig = {
 		extraBaseUrls: [options.gitDomain || config.defaultDomain]
-	}
+	};
 };
 
 Registry.prototype._sync = function (callback) {
@@ -67,9 +67,9 @@ Registry.prototype.packages = function (page, callback) {
         }
         //TODO: make this a DB operation!
         packages.map(function (pkg) {
-	        if (pkg.repository && pkg.repository.url) {
-	        	pkg.repository.webURL = urlParser(pkg.repository.url, self._urlParserConfig);
-	        }
+			if (pkg.repository && pkg.repository.url) {
+				pkg.repository.webURL = urlParser(pkg.repository.url, self._urlParserConfig);
+			}
         }, this);
         callback(packages);
     });
