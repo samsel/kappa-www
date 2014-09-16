@@ -74,6 +74,19 @@ html, body {
     font-size: 0.9em !important;
 }
 
+.error-title {
+    font-family: 'Rock Salt', cursive;
+    font-size: 48px;
+    margin: 20px;
+    text-align: center;
+    color: #D00000;
+}
+
+.error-msg {
+    text-align: center;
+}
+
+
 /* hack */
 .twitter-typeahead {
     display: block !important;
