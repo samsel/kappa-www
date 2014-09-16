@@ -13,13 +13,14 @@ var utils      = require('./utils');
 var Registry = module.exports = function (options) {
 	this._client = null;
 	this._options = options;
-	this._domain = options.gitDomain || 
-					config.defaultDomain;
 	this._syncURL = this._options.registry + 
 					config.registry.dumpURL;
 	this._cachePath = path.resolve(__dirname + 
 							'/../' + 
 							config.directory.cache);
+	this._urlParserConfig = {
+		extraBaseUrls: [options.gitDomain || config.defaultDomain]
+	}
 };
 
 Registry.prototype._sync = function (callback) {
@@ -59,16 +60,17 @@ Registry.prototype.init = function (callback) {
 };
 
 Registry.prototype.packages = function (page, callback) {
+	var self = this;
     store.getPackages(page, function (err, packages) {
         if (err) {
             throw err;
         }
         //TODO: make this a DB operation!
-        //packages.map(function (_package) {
-        //if (_package.repository && _package.repository.url) {
-        //_package.repository.webURL = urlParser(_package.repository.url, {extraBaseUrls: [self._domain]});
-        //}
-        //});
+        packages.map(function (pkg) {
+	        if (pkg.repository && pkg.repository.url) {
+	        	pkg.repository.webURL = urlParser(pkg.repository.url, self._urlParserConfig);
+	        }
+        }, this);
         callback(packages);
     });
 };
