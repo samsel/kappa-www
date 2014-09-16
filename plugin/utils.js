@@ -1,4 +1,5 @@
 var config = require('../config');
+var path   = require('path');
 
 'use strict';
 
@@ -61,8 +62,8 @@ module.exports = (function () {
 			return decodeURIComponent(req.url.pathname.split('/').pop());
 		},
 		assestRoute: '/'  + config.directory.asset + '/{path*}',
-		assestPath: __dirname + '/../' + config.directory.asset,
+		assestPath: path.normalize(__dirname + '/../' + config.directory.asset),
 		layoutFile: config.layoutFile,			
-		viewPath: __dirname + '/../' + config.directory.asset + '/' + config.directory.template
+		viewPath: path.normalize(__dirname + '/../' + config.directory.asset + '/' + config.directory.template)
 	};
 })();

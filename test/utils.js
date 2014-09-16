@@ -4,6 +4,7 @@ var test = require('tape');
 var Utils = require('../plugin/utils');
 var config = require('../config');
 var Hapi = require('hapi');
+var path = require('path');
 
 
 
@@ -20,7 +21,7 @@ test('kappa-www Utils', function (t) {
     });
 
     t.test('assestPath property', function (t) {
-        t.equal(Utils.assestPath, './' + config.directory.asset);
+        t.equal(Utils.assestPath, path.normalize(__dirname + '/../' + config.directory.asset));
         t.end();
     });
 
@@ -30,7 +31,7 @@ test('kappa-www Utils', function (t) {
     });
 
     t.test('viewPath property', function (t) {
-        t.equal(Utils.viewPath, './' + config.directory.asset + '/' + config.directory.template);
+        t.equal(Utils.viewPath, path.normalize(__dirname + '/../' + config.directory.asset + '/' + config.directory.template));
         t.end();
     }); 
 
