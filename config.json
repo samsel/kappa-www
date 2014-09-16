@@ -17,8 +17,7 @@
 		"enable": true
 	},
 	"registry": {
-		"timeout": 1000,
-		"staleOk": true,
+		"staleOk": false,
 		"dumpURL": "-/all"
 	},
 	"defaultDomain": "github.com",

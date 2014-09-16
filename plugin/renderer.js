@@ -38,9 +38,9 @@ module.exports = function (options, registry) {
 
 	function render(req, reply) {
 		var path = req.url.pathname;
-		if (path.length > 1 && path.charAt(path.length-1) === '/') {
+		if (path.length > 1 && path.charAt(path.length - 1) === '/') {
 			// remove the trailing '/' - if any from the path
-			path = path.substring(0, path.length-1);
+			path = path.substring(0, path.length - 1);
 		}
 
 		if (path === '/') {
