@@ -3,11 +3,7 @@ kappa-www
 
 [![Build Status](https://travis-ci.org/samsel/kappa-www.svg)](https://travis-ci.org/samsel/kappa-www)
 
-kappa-www is a simple web interface for the private npm registry reverse proxy - kappa[https://github.com/krakenjs/kappa].
-It is written as a Hapi Plugin to play nice with the kappa library to serve HTML responses to web based requests(from browsers).
-
-kappa-www is a easy to setup!
-Refer to the Usage section below to understand how kappa-www can be configured and used with kappa.
+kappa-www is a minimal web interface for the private npm registry reverse proxy - [kappa](https://github.com/krakenjs/kappa "kappa"). kappa-www is easy to setup and serves HTML responses for web based requests from browsers.
 
 ## features
 ----------------
@@ -21,21 +17,18 @@ Refer to the Usage section below to understand how kappa-www can be configured a
 ## usage
 --------
 
-```javascript
-// add a package.json (maybe do npm init if you wish with the following and do npm install)
-{
-  "scripts": {
-    "start": "node ./node_modules/kappa/kappa.js -c config.json"
-  },
-  "dependencies": {
-    "kappa": "0.14.3",
-    "kappa-www": "git@github.com:samsel/kappa-www.git#master"
-  }
-}
+```bash
+$ npm init
+$ npm install --save kappa kappa-www
+
+# add start script to package.json:
+#    "scripts": {
+#        "start": "kappa -c config.json",
+#    }
 ```
 
 ```javascript
-// add a config.json file to the dir
+// add the config.json file 
 {
     "servers": [
         {
@@ -69,7 +62,7 @@ $ open http://localhost:8000/
 ## todo
 --------
 * handle errors properly
-* remove the stupid ```if err``` in the code and write it nice n clean
+* remove the ```if err``` in the code and write it nice n clean
 * asset packaging
 * user management
 
