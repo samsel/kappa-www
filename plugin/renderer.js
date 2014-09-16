@@ -1,7 +1,7 @@
 var config   = require('../config');
 var store    = require('./store');
 var utils    = require('./utils');
-var markdown = require('markdown').markdown;
+var marked   = require('marked');
 
 'use strict';
 
@@ -21,7 +21,7 @@ module.exports = function (options, registry) {
 
 	function renderPackagePage(req, reply) {
 		registry.packageInfo(req.url.pathname.slice(1, req.url.pathname.length), function (_package) {
-			_package.readme = markdown.toHTML(_package.readme);
+			_package.readme = marked(_package.readme);
 			reply.view('package', {
 				'title': options.title,
 				'package': _package
