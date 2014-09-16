@@ -61,8 +61,8 @@ module.exports = (function () {
 			return decodeURIComponent(req.url.pathname.split('/').pop());
 		},
 		assestRoute: '/'  + config.directory.asset + '/{path*}',
-		assestPath: './' + config.directory.asset,
+		assestPath: __dirname + '/../' + config.directory.asset,
 		layoutFile: config.layoutFile,			
-		viewPath: './' + config.directory.asset + '/' + config.directory.template
+		viewPath: __dirname + '/../' + config.directory.asset + '/' + config.directory.template
 	};
 })();

@@ -12,7 +12,8 @@ kappa-www is a minimal web interface for the private npm registry reverse proxy 
 
 ## pre-requisites
 -----------------
-* Bower - Make sure that the bower is installed globally.
+* bower - make sure that the bower is installed globally.
+* kappa > 1.x is required!
 
 ## usage
 --------
