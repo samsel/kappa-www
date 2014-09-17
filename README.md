@@ -39,13 +39,11 @@ $ npm install --save kappa kappa-www
     ],
     "plugins": {
         "kappa-www": {
-            "vhost": "localhost",
             "title": "My Orgs Private NPM Browser"
             "registry": "http://npm.myorg.com/",
             "gitDomain": "github.yourdomain.com" (defaults to github.com)    
         },
         "kappa": {
-            "vhost": "localhost",
             "paths": [
                 "http://npm.myorg.com/",
                 "https://registry.npmjs.org/"
