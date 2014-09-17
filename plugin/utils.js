@@ -1,9 +1,19 @@
 var config = require('../config');
 var path   = require('path');
+var _      = require('underscore');
 
 'use strict';
 
 module.exports = (function () {
+
+	var whitelistedKeys = [
+		'name',
+		'description',
+		'maintainers',
+		'keywords',
+		'repository',
+		'author'
+	];
 
 	var utils = {
 		isNonNPMClientBasedRequest: function (req) {
@@ -44,7 +54,9 @@ module.exports = (function () {
                 // timestamps also in the
                 // response. we ignore that.
                 if (typeof pkg === 'object') {
-                    filteredPackages.push(pkg);
+					// pick only the whitelisted attributes
+					// from the couch document object.
+					filteredPackages.push(_.pick(pkg, whitelistedKeys));
                 }
 			});
 

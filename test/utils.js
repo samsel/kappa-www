@@ -134,6 +134,25 @@ test('kappa-www Utils', function (t) {
         t.equal(output.length, 1);
         t.equal(output[0]._id, undefined);
         t.end();
-    });                                                  
+    }); 
+
+    t.test('packageCleaner method should clean the input array and return only array of objects with the whitelistedkeys' , function (t) {
+        var input = [{
+            _id: '_id attr',
+            another: 'attr',
+            name: 'my pkg',
+            description: '',
+            maintainers: {},
+            keywords: [],
+            repository: {},
+            author: {}
+        }];
+
+        var output = Utils.packageCleaner(input);
+
+        t.equal(output[0].another, undefined);
+        t.equal(Object.keys(output[0]).length, 6);
+        t.end();
+    });                                                      
 
 });
