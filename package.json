@@ -3,6 +3,7 @@
   "version": "0.0.5",
   "description": "web interface for kappa",
   "main": "plugin/index.js",
+  "bin": "task/clean.js",
   "scripts": {
     "postinstall": "node_modules/.bin/bower install --allow-root",
     "test": "npm run lint && tape test/*.js",
@@ -35,6 +36,8 @@
     "hapi": "^6.5.1",
     "jshint": "~2.4.4",
     "kappa": "^0.14.3",
+    "minimist": "^1.1.0",
+    "rimraf": "^2.2.8",
     "tape": "^2.14.0"
   },
   "repository": {

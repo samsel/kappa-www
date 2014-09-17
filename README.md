@@ -60,6 +60,11 @@ $ npm start
 $ open http://localhost:8000/
 ````
 
+```bash
+# to clear cache and clean the local datastore
+$ kappa-www clean
+```
+
 ## todo
 --------
 * handle errors properly
