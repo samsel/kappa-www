@@ -41,7 +41,7 @@ $ npm install --save kappa kappa-www
         "kappa-www": {
             "title": "My Orgs Private NPM Browser"
             "registry": "http://npm.myorg.com/",
-            "gitDomain": "github.yourdomain.com" (defaults to github.com)    
+            "gitDomain": ["github.yourdomain.com"] //(defaults to github.com)    
         },
         "kappa": {
             "paths": [
