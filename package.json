@@ -1,6 +1,6 @@
 {
   "name": "kappa-www",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "web interface for kappa",
   "main": "plugin/index.js",
   "bin": "task/clean.js",
@@ -32,7 +32,7 @@
     "npmconf": "^2.0.8",
     "underscore": "^1.7.0",
     "minimist": "^1.1.0",
-    "rimraf": "^2.2.8",
+    "rimraf": "^2.2.8"
   },
   "devDependencies": {
     "hapi": "^6.5.1",
