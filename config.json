@@ -20,7 +20,7 @@
 		"staleOk": false,
 		"dumpURL": "-/all"
 	},
-	"defaultDomain": "github.com",
+	"defaultDomain": ["github.com"],
 	"nedb": {
 		"name": "local.npm.db"
 	}

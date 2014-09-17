@@ -1,6 +1,6 @@
 {
   "name": "kappa-www",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "web interface for kappa",
   "main": "plugin/index.js",
   "bin": "task/clean.js",
@@ -17,7 +17,7 @@
     "kappa"
   ],
   "engines": {
-    "node": ">=0.10.12"
+    "node": ">=0.10.30"
   },
   "engineStrict": true,
   "dependencies": {
@@ -45,7 +45,12 @@
     "url": "https://github.com/samsel/kappa-www.git"
   },
   "author": "Sam Selvanathan",
-  "license": "ISC",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.githubusercontent.com/samsel/kappa-www/master/LICENSE"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/samsel/kappa-www/issues"
   },

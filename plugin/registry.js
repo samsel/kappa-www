@@ -19,7 +19,7 @@ var Registry = module.exports = function (options) {
 							'/../' + 
 							config.directory.cache);
 	this._urlParserConfig = {
-		extraBaseUrls: [options.gitDomain || config.defaultDomain]
+		extraBaseUrls: options.gitDomain || config.defaultDomain
 	};
 };
 
@@ -66,21 +66,26 @@ Registry.prototype.packages = function (page, callback) {
             throw err;
         }
         //TODO: make this a DB operation!
-        packages.map(function (pkg) {
-			if (pkg.repository && pkg.repository.url) {
-				pkg.repository.webURL = urlParser(pkg.repository.url, self._urlParserConfig);
-			}
-        }, this);
+        packages.map(self._addWebURLForPackage, self);
         callback(packages);
     });
 };
 
 Registry.prototype.packageInfo = function (name, callback) {
+	var self = this;
 	this._client.get(this._options.registry + name, 
 		config.registry, 
 		function (err, data, raw, res) {
 			if (err) { throw err; }
-			callback(data);
+			callback(self._addWebURLForPackage(data));
 		}
 	);
+};
+
+Registry.prototype._addWebURLForPackage = function (pkg) {
+	if (pkg.repository && pkg.repository.url) {
+		pkg.repository.webURL = urlParser(pkg.repository.url, this._urlParserConfig);
+	}
+
+	return pkg;
 };
