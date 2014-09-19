@@ -3,7 +3,7 @@ kappa-www
 
 [![Build Status](https://travis-ci.org/samsel/kappa-www.svg)](https://travis-ci.org/samsel/kappa-www)
 
-kappa-www is a minimal web interface for the private npm registry reverse proxy - [kappa](https://github.com/krakenjs/kappa "kappa"). kappa-www is easy to setup and serves HTML responses for web based requests from browsers.
+kappa-www is a minimal web interface for the private NPM registry reverse proxy - [kappa](https://github.com/krakenjs/kappa "kappa"). kappa-www is easy to setup and serves HTML responses for browser based requests to the private registry.
 
 ## features
 ----------------
@@ -55,6 +55,7 @@ $ npm install --save kappa kappa-www
 
 ```shell
 $ npm start
+# open the below url in a browser
 $ open http://localhost:8000/
 ````
 
