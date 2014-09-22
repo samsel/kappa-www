@@ -1,7 +1,7 @@
 {
   "name": "kappa-www",
-  "version": "0.0.8",
-  "description": "web interface for kappa",
+  "version": "0.0.9",
+  "description": "web interface for kappa proxied private npm registry",
   "main": "plugin/index.js",
   "bin": "task/clean.js",
   "scripts": {
