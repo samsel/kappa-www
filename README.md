@@ -3,7 +3,7 @@ kappa-www
 
 [![Build Status](https://travis-ci.org/samsel/kappa-www.svg)](https://travis-ci.org/samsel/kappa-www)
 
-kappa-www is a minimal web interface for any private NPM registry reverse proxied via - [kappa](https://github.com/krakenjs/kappa "kappa"). kappa-www is easy to setup and serves HTML responses for browser based requests to the private registry.
+kappa-www is an easy to setup minimal web interface for any private NPM registry reverse proxied via - [kappa](https://github.com/krakenjs/kappa "kappa").
 
 ## features
 ----------------
@@ -68,7 +68,6 @@ $ kappa-www clean
 --------
 * handle errors properly
 * remove the ```if err``` in the code and write it nice n clean
-* asset packaging
 * user management
 
 ## misc

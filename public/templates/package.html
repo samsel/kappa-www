@@ -2,8 +2,7 @@
 <html lang="en-us">
 <head>
 	<title>{{title}}</title>
-	<link rel="stylesheet" type="text/css" href="/public/components/bootstrap/dist/css/bootstrap.css" />
-	<link rel="stylesheet" type="text/css" href="/public/css/index.css" />
+	<link rel="stylesheet" type="text/css" href="{{assetPath.css}}" />
 </head>
 <body>
 	{{> partials/header }}	
@@ -46,6 +45,6 @@
 		// for debug purpose
 		window.package = {{{json package}}}
 	</script>
-    <script data-main="/public/javascripts/config" src="/public/components/requirejs/require.js"></script>
+    <script src="{{assetPath.js}}"></script>
 </body>
 </html>

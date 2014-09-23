@@ -35,6 +35,10 @@
     "rimraf": "^2.2.8"
   },
   "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-cssmin": "^0.10.0",
+    "grunt-contrib-requirejs": "^0.4.4",
+    "grunt-contrib-watch": "^0.6.1",
     "hapi": "^6.5.1",
     "jshint": "~2.4.4",
     "kappa": "^0.14.3",

@@ -28,6 +28,5 @@ define(['jquery', 'typeahead'], function ($) {
 				console.error(" oops! not good enough to handle like this :(- ");
 			});
 		}
-	});	
-	
+	});
 });

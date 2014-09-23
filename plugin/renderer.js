@@ -1,39 +1,45 @@
-var config   = require('../config');
-var store    = require('./store');
-var utils    = require('./utils');
-var marked   = require('marked');
+var config = require('../config');
+var store  = require('./store');
+var utils  = require('./utils');
+var marked = require('marked');
+var _      = require('underscore');
 
 'use strict';
 
 module.exports = function (options, registry) {
 
+	var defaults = {
+		assetPath: {
+			css   : '/public/build/app.min.css',
+			js    : '/public/build/app.min.js',
+			title : options.title 
+		}
+	};
+
 	function renderListPage(page, req, reply) {
 		registry.packages(page, function (packages) {
-			reply.view('index', {
-				title: options.title,
+			reply.view('index', _.extend({
 				searchUrl: config.search.url,
 				enableSearch: config.search.enable,
 				packages: packages,
 				nextPage: page + 1
-			});	
+			}, defaults));	
 		});	
 	}
 
 	function renderPackagePage(req, reply) {
 		registry.packageInfo(req.url.pathname.slice(1, req.url.pathname.length), function (_package) {
 			_package.readme = marked(_package.readme);
-			reply.view('package', {
-				'title': options.title,
+			reply.view('package', _.extend({
 				'package': _package
-			});	
+			}, defaults));	
 		});	
 	}
 
 	function renderError(req, reply) {		
-		reply.view('error', {
-			title: options.title,
+		reply.view('error', _.extend({
 			error: 'fatal error'
-		});
+		}, defaults));
 	}
 
 	function render(req, reply) {
