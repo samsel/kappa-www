@@ -5,18 +5,16 @@ kappa-www
 
 kappa-www is an easy to setup minimal web interface for any private NPM registry reverse proxied via - [kappa](https://github.com/krakenjs/kappa "kappa").
 
-## features
-----------------
+Currently, the following two features are available in kappa-www,
+
 * browse packages
 * simple search
 
 ## pre-requisites
------------------
 * bower - make sure that the bower is installed globally.
 * kappa > 1.x is required!
 
 ## usage
---------
 
 ```bash
 $ npm init
@@ -29,7 +27,7 @@ $ npm install --save kappa kappa-www
 ```
 
 ```javascript
-// add the config.json file 
+// add the config.json file
 {
     "servers": [
         {
@@ -41,7 +39,7 @@ $ npm install --save kappa kappa-www
         "kappa-www": {
             "title": "My Orgs Private NPM Browser"
             "registry": "http://npm.myorg.com/",
-            "gitDomain": ["github.yourdomain.com"] //(defaults to github.com)    
+            "gitDomain": ["github.yourdomain.com"] //(defaults to github.com)
         },
         "kappa": {
             "paths": [
@@ -64,12 +62,8 @@ $ open http://localhost:8000/
 $ kappa-www clean
 ```
 
-## todo
---------
-* handle errors properly
-* remove the ```if err``` in the code and write it nice n clean
-* user management
+## Run Tests
 
-## misc
---------
-* To Lint: ```npm run lint```
+```bash
+$ npm test
+```
