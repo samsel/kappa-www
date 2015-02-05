@@ -2,10 +2,10 @@
 <html lang="en-us">
 <head>
 	<title>{{title}}</title>
-	<link rel="stylesheet" type="text/css" href="{{assetPath.css}}" />
+	<link rel="stylesheet" type="text/css" href="/{{assetPath.css}}" />
 </head>
 <body>
-	{{> partials/header }}	
+	{{> partials/header }}
 	<div class="container">
 		{{#if enableSearch}}
 			{{> partials/search }}
@@ -14,11 +14,11 @@
 			<div class="col-md-2 col-lg-2"></div>
 			<div class="col-md-8 col-lg-8 content">
 				{{> partials/list }}
-				<a href="/-/page/{{nextPage}}" class="pull-right next">Next</a>	
+				<a href="/-/page/{{nextPage}}" class="pull-right next">Next</a>
 			</div>
 		</div>
 	</div>
 	<div class="footer"></div>
-	<script src="{{assetPath.js}}"></script>
+	<script src="/{{assetPath.js}}"></script>
 </body>
 </html>

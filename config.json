@@ -3,14 +3,13 @@
 		"asset": "public",
 		"template": "templates",
 		"cache": ".cache"
-
 	},
 	"layoutFile": "layout",
 	"syncInterval": 600000,
 	"page": {
 		"url": "/-/page/",
 		"maxResults": 10
-	},	
+	},
 	"search": {
 		"url": "/-/search/",
 		"maxResults": 15,
@@ -23,5 +22,9 @@
 	"defaultDomain": ["github.com"],
 	"nedb": {
 		"name": "local.npm.db"
-	}
+	},
+  "build": {
+    "css": "public/build/app.css",
+    "js": "public/build/app.js"
+  }
 }

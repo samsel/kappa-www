@@ -1,16 +1,18 @@
 'use strict';
 
+var config = require('./config');
+
 var buildDir = 'public/build/';
 
 var browserify = {
   bundle: {
     src: ['public/javascripts/index.js'],
-    dest: buildDir + 'app.js'
+    dest: config.build.js
   }
 };
 
 var cssFiles = {};
-cssFiles[buildDir + 'app.css'] = ['node_modules/bootstrap/dist/css/bootstrap.css', 'public/css/**/*.css']
+cssFiles[config.build.css] = ['node_modules/bootstrap/dist/css/bootstrap.css', 'public/css/**/*.css']
 
 var cssmin = {
   options: {

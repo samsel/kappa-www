@@ -2,10 +2,10 @@
 <html lang="en-us">
 <head>
 	<title>{{title}}</title>
-	<link rel="stylesheet" type="text/css" href="{{assetPath.css}}" />
+	<link rel="stylesheet" type="text/css" href="/{{assetPath.css}}" />
 </head>
 <body>
-	{{> partials/header }}	
+	{{> partials/header }}
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2 col-lg-2"></div>
@@ -15,7 +15,7 @@
 				<div>
 					<a target="_blank" href="{{package.repository.webURL}}">{{package.repository.url}}</a>
 				</div>
-				
+
 				<hr>
 				<div>
 					<h5>Version</h5>
@@ -33,10 +33,10 @@
 					</span>
 				</div>
 				<hr>
-				<h5>ReadMe</h5>	
+				<h5>ReadMe</h5>
 				<div class="readme">
 					{{{package.readme}}}
-				</div>			
+				</div>
 			</div>
 		</div>
 	</div>
@@ -45,6 +45,6 @@
 		// for debug purpose
 		window.package = {{{json package}}}
 	</script>
-    <script src="{{assetPath.js}}"></script>
+    <script src="/{{assetPath.js}}"></script>
 </body>
 </html>
