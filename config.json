@@ -1,28 +1,28 @@
 {
-	"directory": {
-		"asset": "public",
-		"template": "templates",
-		"cache": ".cache"
-	},
-	"layoutFile": "layout",
-	"syncInterval": 600000,
-	"page": {
-		"url": "/-/page/",
-		"maxResults": 10
-	},
-	"search": {
-		"url": "/-/search/",
-		"maxResults": 15,
-		"enable": true
-	},
-	"registry": {
-		"staleOk": false,
-		"dumpURL": "-/all"
-	},
-	"defaultDomain": ["github.com"],
-	"nedb": {
-		"name": "local.npm.db"
-	},
+  "directory": {
+    "asset": "public",
+    "template": "templates",
+    "cache": ".cache"
+  },
+  "layoutFile": "layout",
+  "syncInterval": 600000,
+  "page": {
+    "url": "/-/page/",
+    "maxResults": 10
+  },
+  "search": {
+    "url": "/-/search/",
+    "maxResults": 15,
+    "enable": true
+  },
+  "registry": {
+    "staleOk": false,
+    "dumpURL": "-/all"
+  },
+  "defaultDomain": ["github.com"],
+  "nedb": {
+    "name": "local.npm.db"
+  },
   "build": {
     "dir": "public/build/",
     "css": "public/build/app.css",

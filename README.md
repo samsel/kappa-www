@@ -8,11 +8,7 @@ kappa-www is an easy to setup minimal web interface for any private NPM registry
 Currently, the following two features are available in kappa-www,
 
 * browse packages
-* simple search
-
-## pre-requisites
-* bower - make sure that the bower is installed globally.
-* kappa > 1.x is required!
+* type-ahead search
 
 ## usage
 

@@ -1,11 +1,11 @@
 {
   "name": "kappa-www",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "web interface for kappa proxied private npm registry",
   "main": "plugin/index.js",
   "bin": "tasks/clean.js",
   "scripts": {
-    "postinstall": "node_modules/.bin/grunt build",
+    "postinstall": "grunt build",
     "test": "npm run jscs && npm run lint && tape test/*.js",
     "jscs": "./node_modules/.bin/jscs .",
     "lint": "jshint -c .jshintrc plugin/*.js public/javascripts/*.js"

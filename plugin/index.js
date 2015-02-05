@@ -3,7 +3,7 @@
 var utils = require('./utils');
 var pkg = require('../package');
 var templater = require('./templater');
-var interceptor = require('./interceptor');
+var Interceptor = require('./interceptor');
 
 exports.register = function register(plugin, options, next) {
 
@@ -31,10 +31,13 @@ exports.register = function register(plugin, options, next) {
     }
   });
 
-  plugin.ext('onRequest', interceptor.preIntercept);
-  plugin.ext('onPreResponse', interceptor.postIntercept);
+  Interceptor.create(function onCreate(interceptor) {
 
-  interceptor.setup(options, next);
+    plugin.ext('onRequest', interceptor.preIntercept);
+    plugin.ext('onPreResponse', interceptor.postIntercept);
+
+    next();
+  });
 };
 
 exports.register.attributes = {
