@@ -1,97 +1,109 @@
-var config = require('../config');
-var store  = require('./store');
-var utils  = require('./utils');
-var marked = require('marked');
-var _      = require('underscore');
-
 'use strict';
 
-module.exports = function (options, registry) {
+var _ = require('underscore');
+var marked = require('marked');
+var utils = require('./utils');
+var store = require('./store');
+var config = require('../config');
 
-	var defaults = {
-		assetPath: {
-			css   : '/public/build/app.min.css',
-			js    : '/public/build/app.min.js',
-			title : options.title 
-		}
-	};
+module.exports = function renderer(options, registry) {
 
-	function renderListPage(page, req, reply) {
-		registry.packages(page, function (packages) {
-			reply.view('index', _.extend({
-				searchUrl: config.search.url,
-				enableSearch: config.search.enable,
-				packages: packages,
-				nextPage: page + 1
-			}, defaults));	
-		});	
-	}
+  var defaults = {
+    assetPath: {
+      css: '/public/build/app.min.css',
+      js: '/public/build/app.min.js',
+      title: options.title
+    },
+    searchUrl: config.search.url,
+    enableSearch: config.search.enable
+  };
 
-	function renderPackagePage(req, reply) {
-		registry.packageInfo(req.url.pathname.slice(1, req.url.pathname.length), function (_package) {
-			_package.readme = marked(_package.readme);
-			reply.view('package', _.extend({
-				'package': _package
-			}, defaults));	
-		});	
-	}
+  function renderListPage(page, req, reply) {
+    registry.packages(page, function(packages) {
 
-	function renderError(req, reply) {		
-		reply.view('error', _.extend({
-			error: 'fatal error'
-		}, defaults));
-	}
+      var data = _.extend({
+        packages: packages,
+        nextPage: page + 1
+      }, defaults);
 
-	function render(req, reply) {
-		var path = req.url.pathname;
-		if (path.length > 1 && path.charAt(path.length - 1) === '/') {
-			// remove the trailing '/' - if any from the path
-			path = path.substring(0, path.length - 1);
-		}
+      reply.view('index', data);
+    });
+  }
 
-		if (path === '/') {
-			renderListPage(0, req, reply);
-		}
-		else if (path.indexOf(config.page.url) !== -1) {
-			var page = parseInt(path.replace(config.page.url, ''), 10);
-			if (isNaN(page)) {
-				// TODO: fix me: throw error or redirect to 
-				// index instead of rendering page 0
-				renderListPage(0, req, reply);
-			}
-			else {
-				renderListPage(page, req, reply);
-			}
-		}
-		else if (path.split('/').length === 2) {
-			// render the package view for urls like
-			// http://localhost:8000/<you-pkg-name>
-			renderPackagePage(req, reply);
-		}
-		else {
-			// dont know what to do at this point!
-			// just render whatever it is; as is.
-			reply();
-		}
-	}
+  function renderPackagePage(req, reply) {
+    var name = req.url.pathname.slice(1, req.url.pathname.length);
+    registry.packageInfo(name, function(_package) {
+      var obj = {};
+      obj['package'] = _package;
+      var data = _.extend(obj, defaults);
+      _package.readme = marked(_package.readme);
 
-	function renderSearch(req, reply) {
-		store.search(utils.searchKeyFromRequest(req), function (err, packages) {
-			if (err) {
-				return reply({
-					error: {
-						message: err.message
-					}
-				});
-			}
+      reply.view('package', data);
+    });
+  }
 
-			reply(packages);
-		});
-	}	
+  function renderError(req, reply) {
+    var data = _.extend({
+      error: 'fatal error'
+    }, defaults);
 
-	return {
-		render: render,
-		renderError: renderError,
-		renderSearch: renderSearch
-	};
+    reply.view('error', data);
+  }
+
+  function render(req, reply) {
+    var path = req.url.pathname;
+    if (path.length > 1 && path.charAt(path.length - 1) === '/') {
+      // remove the trailing '/' - if any from the path
+      path = path.substring(0, path.length - 1);
+    }
+
+    if (path === '/') {
+      renderListPage(0, req, reply);
+    }
+    else if (path.indexOf(config.page.url) !== -1) {
+      var page = parseInt(path.replace(config.page.url, ''), 10);
+      if (isNaN(page)) {
+        // TODO: fix me: throw error or redirect to
+        // index instead of rendering page 0
+        renderListPage(0, req, reply);
+      }
+      else {
+        renderListPage(page, req, reply);
+      }
+    }
+    else if (path.split('/').length === 2) {
+      // render the package view for urls like
+      // http://localhost:8000/<you-pkg-name>
+      renderPackagePage(req, reply);
+    }
+    else {
+      // dont know what to do at this point!
+      // just render whatever it is; as is.
+      reply();
+    }
+  }
+
+  function renderSearch(req, reply) {
+    var key = utils.searchKeyFromRequest(req);
+
+    function onSearch(err, packages) {
+      if (err) {
+        return reply({
+          error: {
+            message: err.message
+          }
+        });
+      }
+
+      reply(packages);
+    }
+
+    store.search(key, onSearch);
+  }
+
+  return {
+    render: render,
+    renderError: renderError,
+    renderSearch: renderSearch
+  };
 };

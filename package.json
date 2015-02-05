@@ -1,12 +1,13 @@
 {
   "name": "kappa-www",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "web interface for kappa proxied private npm registry",
   "main": "plugin/index.js",
   "bin": "tasks/clean.js",
   "scripts": {
     "postinstall": "node_modules/.bin/bower install",
-    "test": "npm run lint && tape test/*.js",
+    "test": "npm run jscs && npm run lint && tape test/*.js",
+    "jscs": "./node_modules/.bin/jscs .",
     "lint": "jshint -c .jshintrc plugin/*.js public/javascripts/*.js"
   },
   "keywords": [
@@ -43,6 +44,7 @@
     "grunt-contrib-requirejs": "^0.4.4",
     "grunt-contrib-watch": "^0.6.1",
     "hapi": "^8.1.0",
+    "jscs": "^1.10.0",
     "jshint": "^2.6.0",
     "kappa": "^1.0.0-rc.8",
     "tape": "^3.5.0"

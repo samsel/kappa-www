@@ -1,27 +1,24 @@
-define(function () {
+define(function config() {
 
-    'use strict';
+  'use strict';
 
-    requirejs.config({
+  var config = {
+    useStrict: true,
+    baseUrl: '/public',
+    paths: {
+      jquery: 'components/jquery/dist/jquery',
+      typeahead: 'components/typeahead.js/dist/typeahead.jquery'
+    },
+    shim: {
+      jquery: {
+        exports: 'jQuery'
+      },
+      typeahead: {
+        deps: ['jquery']
+      }
+    }
+  };
 
-        useStrict: true,
-
-        baseUrl: "/public",
-
-        paths: {
-            'jquery': 'components/jquery/dist/jquery',
-            'typeahead': 'components/typeahead.js/dist/typeahead.jquery'
-        },        
-
-        shim: {
-            'jquery': {
-                exports: 'jQuery'
-            },
-            'typeahead': {
-                deps: ['jquery']
-            }         
-        }        
-    });
-
-    require(['javascripts/search']);
+  requirejs.config(config);
+  require(['javascripts/search']);
 });

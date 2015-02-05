@@ -14,7 +14,7 @@ module.exports = function(grunt) {
 	requirejs: {
 		compile: {
 			options: {
-				baseUrl: "public",
+				baseUrl: 'public',
 				mainConfigFile: 'public/javascripts/config.js',
 				optimize: 'uglify',
 				findNestedDependencies: true,
@@ -30,8 +30,7 @@ module.exports = function(grunt) {
 		},
 		combine: {
 			files: {
-				'public/build/app.min.css': ['public/components/bootstrap/dist/css/bootstrap.css', 
-											'public/css/**/*.css']
+				'public/build/app.min.css': ['public/components/bootstrap/dist/css/bootstrap.css', 'public/css/**/*.css']
 			}
 		}
 	}

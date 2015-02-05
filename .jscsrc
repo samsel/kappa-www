@@ -1,0 +1,9 @@
+{
+	"preset": "airbnb",
+  "requireMultipleVarDecl": null,
+  "excludeFiles": [
+    "node_modules/**",
+    "public/build/**",
+    "public/components/**"
+  ]
+}

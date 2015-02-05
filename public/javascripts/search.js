@@ -1,32 +1,36 @@
-define(['jquery', 'typeahead'], function ($) {
+define(['jquery', 'typeahead'], function search($) {
 
-	var searchInput = $('#search'),
-		url = searchInput.attr('data-url');
+  var searchInput = $('#search');
+  var url = searchInput.attr('data-url');
 
-	searchInput.on('typeahead:selected', function () {
-		window.location.href = '/' + searchInput.val();
-	});
+  searchInput.on('typeahead:selected', function onTypeAheadSelected() {
+    window.location.href = '/' + searchInput.val();
+  });
 
-	searchInput.typeahead({
-		minLength: 1
-	},
-	{
-		name: 'packages',
-		displayKey: 'name',
-		source: function (query, process) {
+  var typeaheadConfig = {
+    minLength: 1
+  };
 
-			var xhr = $.ajax({
-				url: url + query,
-				method: "GET"
-			});
+  function typeaheadSource(query, process) {
+    var xhr = $.ajax({
+      url: url + query,
+      method: 'GET'
+    });
 
-			xhr.done(function () {		
-				process(xhr.responseJSON);
-			});					
+    xhr.done(function() {
+      process(xhr.responseJSON);
+    });
 
-			xhr.fail(function () {
-				console.error(" oops! not good enough to handle like this :(- ");
-			});
-		}
-	});
+    xhr.fail(function() {
+      console.error('oops! not good enough to handle like this :(- ');
+    });
+  }
+
+  var typeaheadMeta = {
+    name: 'packages',
+    displayKey: 'name',
+    source: typeaheadSource
+  };
+
+  searchInput.typeahead(typeaheadConfig, typeaheadMeta);
 });
