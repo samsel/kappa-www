@@ -33,9 +33,16 @@ exports.register = function register(plugin, options, next) {
     }
   });
 
-  Registry.start(options, function onStart(registry) {
+  Registry.start(options, function onStart(err, registry) {
 
-    var renderer = Renderer.create(options.title, registry);
+    if (err) {
+      // throw an error right away
+      // indicating that the Registry
+      // could not be started.
+      throw err;
+    }
+
+    var renderer = Renderer.create(options.title, options.gitDomain, registry);
     var interceptor = Interceptor.create(renderer);
 
     plugin.ext('onRequest', interceptor.onRequest);

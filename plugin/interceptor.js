@@ -6,12 +6,12 @@ var proto = {
 
   onRequest: function preIntercept(req, reply) {
     if (utils.isSearchRequest(req)) {
-      this.renderer.renderSearch(req, reply);
+      this.renderer.render.search(req, reply);
       return;
     }
 
     if (utils.shouldRenderHtml(req)) {
-      this.renderer.renderHtml(req, reply);
+      this.renderer.render.html(req, reply);
       return;
     }
 
@@ -20,7 +20,7 @@ var proto = {
 
   onPreResponse: function postIntercept(req, reply) {
     if (req.response && req.response.isBoom && utils.shouldRenderHtml(req)) {
-      this.renderer.renderError(req, reply);
+      this.renderer.render.error(req, reply);
       return;
     }
 

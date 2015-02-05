@@ -22,13 +22,6 @@ var db = new Datastore({
   autoload: true
 });
 
-db.count({}, function(err, count) {
-  if (err) {
-    throw err;
-  }
-  console.dir('docs count in the local store: ' + count);
-});
-
 function buildQuery(key) {
   var regex = new RegExp(key, 'i');
   return {
@@ -46,34 +39,29 @@ function buildQuery(key) {
 
 module.exports = {
 
-  update: function(packages) {
+  count: function count(callback) {
+    db.count({}, callback);
+  },
 
-    function mapper(pkg, callback) {
+  update: function update(packages, callback) {
+
+    function mapper(pkg, next) {
       var update = {
         name: pkg.name
       };
-      db.update(update, pkg, updateOptions, callback);
+      db.update(update, pkg, updateOptions, next);
     }
 
-    function done(err, results) {
-      if (err) {
-        // throw error and let the dev know
-        // that something is terribly wrong!
-        throw err;
-      }
-      console.log('inserted packages into the local nedb.');
-    }
-
-    async.mapSeries(packages, mapper, done);
+    async.mapSeries(packages, mapper, callback);
   },
 
-  search: function(key, callback) {
+  search: function search(key, callback) {
     db.find(buildQuery(key), projections)
       .limit(config.search.maxResults)
       .exec(callback);
   },
 
-  get: function(page, callback) {
+  get: function get(page, callback) {
     db.find({})
       .sort(sortKeys)
       .skip(page * config.page.maxResults)
