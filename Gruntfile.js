@@ -4,6 +4,8 @@ var config = require('./config');
 
 var buildDir = 'public/build/';
 
+var bootstrapDir = 'node_modules/bootstrap/dist/';
+
 var browserify = {
   bundle: {
     src: ['public/javascripts/index.js'],
@@ -12,7 +14,7 @@ var browserify = {
 };
 
 var cssFiles = {};
-cssFiles[config.build.css] = ['node_modules/bootstrap/dist/css/bootstrap.css', 'public/css/**/*.css']
+cssFiles[config.build.css] = [bootstrapDir + 'css/bootstrap.css', 'public/css/**/*.css']
 
 var cssmin = {
   options: {
@@ -34,19 +36,34 @@ var watch = {
   }
 };
 
+// to copy over all the bootstrap fonts
+// into the build directory.
+var copy = {
+  main: {
+    files: [{
+      expand: true,
+      flatten: true,
+      src: [bootstrapDir + 'fonts/*'],
+      dest: config.build.dir
+    }]
+  }
+};
+
 module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     watch: watch,
     browserify: browserify,
-    cssmin: cssmin
+    cssmin: cssmin,
+    copy: copy
   });
 
-  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-  grunt.registerTask('build', ['cssmin', 'browserify']);
+  grunt.registerTask('build', ['cssmin', 'browserify', 'copy']);
   grunt.registerTask('default', ['watch']);
 };

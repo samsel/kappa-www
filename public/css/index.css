@@ -1,3 +1,16 @@
+
+/*
+  rewrite the bootstrap font path to the build folder
+  our grunt `install` task will take care of copying the
+  fonts from the bootstrap install location.
+*/
+@font-face {
+  font-family: 'Glyphicons Halflings';
+
+  src: url('../build/glyphicons-halflings-regular.eot');
+  src: url('../build/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../build/glyphicons-halflings-regular.woff2') format('woff2'), url('../build/glyphicons-halflings-regular.woff') format('woff'), url('../build/glyphicons-halflings-regular.ttf') format('truetype'), url('../build/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
 html, body {
     background-color: #6e6d71;
     background-color: #fafafa;
@@ -30,7 +43,7 @@ html, body {
 }
 
 .media {
-    border-bottom: 1px solid #CCD1D9; 
+    border-bottom: 1px solid #CCD1D9;
 }
 
 .media p {
@@ -42,7 +55,7 @@ html, body {
     height: 5px;
     padding: 0;
     background-color: #4A89DC;
-    border-color: #4A89DC;  
+    border-color: #4A89DC;
 }
 
 .author {
@@ -62,7 +75,7 @@ html, body {
     background: #fff;
     border-radius: 4px;
     padding: 10px;
-    border: 1px solid #eee;  
+    border: 1px solid #eee;
 }
 
 .error-title {

@@ -24,6 +24,7 @@
 		"name": "local.npm.db"
 	},
   "build": {
+    "dir": "public/build/",
     "css": "public/build/app.css",
     "js": "public/build/app.js"
   }
