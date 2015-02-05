@@ -1,4 +1,5 @@
 {
+	"name": "kappa-www",
   "private": true,
   "ignore": [
     "**/.*",

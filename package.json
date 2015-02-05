@@ -1,11 +1,11 @@
 {
   "name": "kappa-www",
-  "version": "0.0.9",
+  "version": "1.0.0",
   "description": "web interface for kappa proxied private npm registry",
   "main": "plugin/index.js",
-  "bin": "task/clean.js",
+  "bin": "tasks/clean.js",
   "scripts": {
-    "postinstall": "node_modules/.bin/bower install --allow-root",
+    "postinstall": "node_modules/.bin/bower install",
     "test": "npm run lint && tape test/*.js",
     "lint": "jshint -c .jshintrc plugin/*.js public/javascripts/*.js"
   },
@@ -22,27 +22,30 @@
   "engineStrict": true,
   "dependencies": {
     "async": "^0.9.0",
-    "bower": "^1.3.9",
+    "bower": "^1.3.12",
     "github-url-from-git": "^1.4.0",
     "handlebars": "^2.0.0",
-    "marked": "^0.3.2",
-    "nedb": "^0.11.1",
-    "npm": "^1.5.0-alpha-4",
-    "npm-registry-client": "^3.1.7",
-    "npmconf": "^2.0.8",
-    "underscore": "^1.7.0",
+    "marked": "^0.3.3",
     "minimist": "^1.1.0",
-    "rimraf": "^2.2.8"
+    "nedb": "^1.1.1",
+    "npm": "^2.4.1",
+    "npm-registry-client": "^6.0.7",
+    "npmconf": "^2.1.1",
+    "rimraf": "^2.2.8",
+    "underscore": "^1.7.0"
+  },
+  "peerDependencies": {
+    "kappa": ">=1.0.0-rc.8"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
-    "grunt-contrib-cssmin": "^0.10.0",
+    "grunt-contrib-cssmin": "^0.11.0",
     "grunt-contrib-requirejs": "^0.4.4",
     "grunt-contrib-watch": "^0.6.1",
-    "hapi": "^6.5.1",
-    "jshint": "~2.4.4",
-    "kappa": "^0.14.3",
-    "tape": "^2.14.0"
+    "hapi": "^8.1.0",
+    "jshint": "^2.6.0",
+    "kappa": "^1.0.0-rc.8",
+    "tape": "^3.5.0"
   },
   "repository": {
     "type": "git",
