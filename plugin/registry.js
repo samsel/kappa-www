@@ -10,7 +10,7 @@ var config = require('../config');
 var Client = require('npm-registry-client');
 var urlParser = require('github-url-from-git');
 
-module.exports = function Registry(options) {
+function Registry(options) {
   this._client = null;
   this._options = options;
   this._syncURL = this._options.registry + config.registry.dumpURL;
@@ -18,7 +18,7 @@ module.exports = function Registry(options) {
   this._urlParserConfig = {
     extraBaseUrls: options.gitDomain || config.defaultDomain
   };
-};
+}
 
 Registry.prototype._sync = function(callback) {
   this._client.get(this._syncURL, config.registry, function(err, data) {
@@ -87,3 +87,5 @@ Registry.prototype._addWebURLForPackage = function(pkg) {
 
   return pkg;
 };
+
+module.exports = Registry;

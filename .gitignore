@@ -29,10 +29,6 @@ ehthumbs.db
 Icon?
 Thumbs.db
 
-public/components/
-
+public/build
 .cache
-
 *.db
-
-private.todo

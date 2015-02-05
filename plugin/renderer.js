@@ -10,8 +10,8 @@ module.exports = function renderer(options, registry) {
 
   var defaults = {
     assetPath: {
-      css: '/public/build/app.min.css',
-      js: '/public/build/app.min.js',
+      css: '/public/build/app.css',
+      js: '/public/build/app.js',
       title: options.title
     },
     searchUrl: config.search.url,

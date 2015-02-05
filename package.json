@@ -1,11 +1,11 @@
 {
   "name": "kappa-www",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "web interface for kappa proxied private npm registry",
   "main": "plugin/index.js",
   "bin": "tasks/clean.js",
   "scripts": {
-    "postinstall": "node_modules/.bin/bower install",
+    "postinstall": "node_modules/.bin/grunt build",
     "test": "npm run jscs && npm run lint && tape test/*.js",
     "jscs": "./node_modules/.bin/jscs .",
     "lint": "jshint -c .jshintrc plugin/*.js public/javascripts/*.js"
@@ -23,8 +23,9 @@
   "engineStrict": true,
   "dependencies": {
     "async": "^0.9.0",
-    "bower": "^1.3.12",
+    "bootstrap": "^3.3.2",
     "github-url-from-git": "^1.4.0",
+    "grunt-cli": "^0.1.13",
     "handlebars": "^2.0.0",
     "marked": "^0.3.3",
     "minimist": "^1.1.0",
@@ -33,6 +34,7 @@
     "npm-registry-client": "^6.0.7",
     "npmconf": "^2.1.1",
     "rimraf": "^2.2.8",
+    "typeahead.js": "^0.10.5",
     "underscore": "^1.7.0"
   },
   "peerDependencies": {
@@ -40,6 +42,7 @@
   },
   "devDependencies": {
     "grunt": "^0.4.5",
+    "grunt-browserify": "^3.3.0",
     "grunt-contrib-cssmin": "^0.11.0",
     "grunt-contrib-requirejs": "^0.4.4",
     "grunt-contrib-watch": "^0.6.1",
