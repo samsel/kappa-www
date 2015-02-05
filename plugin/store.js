@@ -73,7 +73,7 @@ module.exports = {
       .exec(callback);
   },
 
-  getPackages: function(page, callback) {
+  get: function(page, callback) {
     db.find({})
       .sort(sortKeys)
       .skip(page * config.page.maxResults)

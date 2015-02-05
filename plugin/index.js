@@ -2,6 +2,8 @@
 
 var utils = require('./utils');
 var pkg = require('../package');
+var Registry = require('./registry');
+var Renderer = require('./renderer');
 var templater = require('./templater');
 var Interceptor = require('./interceptor');
 
@@ -31,10 +33,13 @@ exports.register = function register(plugin, options, next) {
     }
   });
 
-  Interceptor.create(function onCreate(interceptor) {
+  Registry.start(options, function onStart(registry) {
 
-    plugin.ext('onRequest', interceptor.preIntercept);
-    plugin.ext('onPreResponse', interceptor.postIntercept);
+    var renderer = Renderer.create(options.title, registry);
+    var interceptor = Interceptor.create(renderer);
+
+    plugin.ext('onRequest', interceptor.onRequest);
+    plugin.ext('onPreResponse', interceptor.onPreResponse);
 
     next();
   });
