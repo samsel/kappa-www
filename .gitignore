@@ -32,3 +32,4 @@ Thumbs.db
 public/build
 .cache
 *.db
+.idea

@@ -3,6 +3,7 @@
 var npm = require('npm');
 var path = require('path');
 var _ = require('underscore');
+var log = require('./logger');
 var store = require('./store');
 var utils = require('./utils');
 var npmconf = require('npmconf');
@@ -61,14 +62,17 @@ module.exports.start = function start(options, done) {
 
     function syncWrap() {
       sync(function onSync(err) {
-        // log the error
-        // informing that syncs
-        // are failing
+        // log the error informing
+        // that syncs are failing.
+        if (err) {
+          log.info(err);
+        }
       });
     }
 
     // start to regularly sync the packages
     setInterval(syncWrap, config.syncInterval);
+
     var publicAPI = {
       packageInfo: packageInfo
     };

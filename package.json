@@ -1,6 +1,6 @@
 {
   "name": "kappa-www",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "web interface for kappa proxied private npm registry",
   "main": "plugin/index.js",
   "bin": "tasks/clean.js",
@@ -24,6 +24,7 @@
   "dependencies": {
     "async": "^0.9.0",
     "bootstrap": "^3.3.2",
+    "bunyan": "^1.3.3",
     "github-url-from-git": "^1.4.0",
     "grunt-cli": "^0.1.13",
     "handlebars": "^2.0.0",
