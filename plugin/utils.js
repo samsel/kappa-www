@@ -43,9 +43,6 @@ module.exports = {
     var filteredPackages = [];
     packages.forEach(function(pkg) {
       if (pkg._id) {
-        console.log('package named: ' +
-          pkg.name +
-          ' has _id attribute in its document. removing it.');
         delete pkg._id;
       }
       // get only objects.

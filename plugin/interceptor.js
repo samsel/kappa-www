@@ -2,40 +2,32 @@
 
 var utils = require('./utils');
 
-var proto = {
+module.exports.create = function create(render) {
 
-  onRequest: function preIntercept(req, reply) {
-    if (utils.isSearchRequest(req)) {
-      this.renderer.render.search(req, reply);
-      return;
+  return {
+
+    onRequest: function preIntercept(req, reply) {
+      if (utils.isSearchRequest(req)) {
+        render.search(req, reply);
+        return;
+      }
+
+      if (utils.shouldRenderHtml(req)) {
+        render.html(req, reply);
+        return;
+      }
+
+      reply();
+    },
+
+    onPreResponse: function postIntercept(req, reply) {
+      if (req.response && req.response.isBoom && utils.shouldRenderHtml(req)) {
+        render.error(req, reply);
+        return;
+      }
+
+      reply();
     }
+  };
 
-    if (utils.shouldRenderHtml(req)) {
-      this.renderer.render.html(req, reply);
-      return;
-    }
-
-    reply();
-  },
-
-  onPreResponse: function postIntercept(req, reply) {
-    if (req.response && req.response.isBoom && utils.shouldRenderHtml(req)) {
-      this.renderer.render.error(req, reply);
-      return;
-    }
-
-    reply();
-  }
-};
-
-module.exports.create = function create(renderer) {
-
-  return Object.create(proto, {
-    renderer: {
-      value: renderer,
-      enumerable: false,
-      configurable: false,
-      writable: false
-    }
-  });
 };

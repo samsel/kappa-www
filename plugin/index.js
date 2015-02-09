@@ -42,8 +42,8 @@ exports.register = function register(plugin, options, next) {
       throw err;
     }
 
-    var renderer = Renderer.create(options.title, options.gitDomain, registry);
-    var interceptor = Interceptor.create(renderer);
+    var render = Renderer.create(options.title, options.gitDomain, registry);
+    var interceptor = Interceptor.create(render);
 
     plugin.ext('onRequest', interceptor.onRequest);
     plugin.ext('onPreResponse', interceptor.onPreResponse);

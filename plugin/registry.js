@@ -44,12 +44,10 @@ module.exports.start = function start(options, done) {
         if (err) {
           return next(err);
         }
-
-        console.dir('pkgs count in the local store: ' + count);
       });
 
       if (typeof next === 'function') {
-        next(packages);
+        next(null, packages);
       }
     });
   }
