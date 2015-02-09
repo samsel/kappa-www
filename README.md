@@ -20,7 +20,6 @@ $ npm install --save kappa kappa-www
 #    "scripts": {
 #        "start": "kappa -c config.json"
 #    }
-```
 
 # to debug with node-inspector add the below debug start script to package.json:
 #    "scripts": {
